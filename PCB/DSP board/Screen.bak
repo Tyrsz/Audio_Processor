@@ -1,0 +1,1030 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:switches
+LIBS:relays
+LIBS:motors
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:STM32
+LIBS:SDRAM
+LIBS:CODEC
+LIBS:TVS_ARRAY
+LIBS:BUCK
+LIBS:LDO
+LIBS:BOOST
+LIBS:CONNECTOR
+LIBS:POWER_SW
+LIBS:EMI_GASKET
+LIBS:LED
+LIBS:Main board-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 7 9
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Conn_01x40_Female J2
+U 1 1 5AB94CC4
+P 6225 3525
+F 0 "J2" H 6225 5525 50  0000 C CNN
+F 1 "Conn_01x40_Female" H 6225 1425 50  0000 C CNN
+F 2 "" H 6225 3525 50  0001 C CNN
+F 3 "" H 6225 3525 50  0001 C CNN
+	1    6225 3525
+	1    0    0    -1  
+$EndComp
+Text GLabel 5925 5525 0    60   BiDi ~ 0
+TFT_LED-
+Text GLabel 5925 5425 0    60   BiDi ~ 0
+TFT_LED+
+Text GLabel 5925 5125 0    60   Input ~ 0
+TFT_R0
+Text GLabel 5925 5025 0    60   Input ~ 0
+TFT_R1
+Text GLabel 5925 4925 0    60   Input ~ 0
+TFT_R2
+Text GLabel 5925 4825 0    60   Input ~ 0
+TFT_R3
+Text GLabel 5925 4725 0    60   Input ~ 0
+TFT_R4
+Text GLabel 5925 4625 0    60   Input ~ 0
+TFT_R5
+Text GLabel 5925 4525 0    60   Input ~ 0
+TFT_R6
+Text GLabel 5925 4425 0    60   Input ~ 0
+TFT_R7
+Text GLabel 5925 4325 0    60   Input ~ 0
+TFT_G0
+Text GLabel 5925 4225 0    60   Input ~ 0
+TFT_G1
+Text GLabel 5925 4125 0    60   Input ~ 0
+TFT_G2
+Text GLabel 5925 4025 0    60   Input ~ 0
+TFT_G3
+Text GLabel 5925 3925 0    60   Input ~ 0
+TFT_G4
+Text GLabel 5925 3825 0    60   Input ~ 0
+TFT_G5
+Text GLabel 5925 3725 0    60   Input ~ 0
+TFT_G6
+Text GLabel 5925 3625 0    60   Input ~ 0
+TFT_G7
+Text GLabel 5925 3525 0    60   Input ~ 0
+TFT_B0
+Text GLabel 5925 3425 0    60   Input ~ 0
+TFT_B1
+Text GLabel 5925 3325 0    60   Input ~ 0
+TFT_B2
+Text GLabel 5925 3225 0    60   Input ~ 0
+TFT_B3
+Text GLabel 5925 3125 0    60   Input ~ 0
+TFT_B4
+Text GLabel 5925 3025 0    60   Input ~ 0
+TFT_B5
+Text GLabel 5925 2925 0    60   Input ~ 0
+TFT_B6
+Text GLabel 5925 2825 0    60   Input ~ 0
+TFT_B7
+Text GLabel 5925 2625 0    60   Input ~ 0
+TFT_CLKIN
+Text GLabel 5925 2525 0    60   Input ~ 0
+TFT_STBYB
+Text GLabel 5925 2425 0    60   Input ~ 0
+TFT_HSD
+Text GLabel 5925 2325 0    60   Input ~ 0
+TFT_VSD
+Text GLabel 5925 2225 0    60   Input ~ 0
+TFT_DEN
+$Comp
+L GND #PWR93
+U 1 1 5AB957CE
+P 5925 5325
+F 0 "#PWR93" H 5925 5075 50  0001 C CNN
+F 1 "GND" V 5925 5125 50  0000 C CNN
+F 2 "" H 5925 5325 50  0001 C CNN
+F 3 "" H 5925 5325 50  0001 C CNN
+	1    5925 5325
+	0    1    -1   0   
+$EndComp
+$Comp
+L GND #PWR92
+U 1 1 5AB9582D
+P 5925 2725
+F 0 "#PWR92" H 5925 2475 50  0001 C CNN
+F 1 "GND" V 5925 2525 50  0000 C CNN
+F 2 "" H 5925 2725 50  0001 C CNN
+F 3 "" H 5925 2725 50  0001 C CNN
+	1    5925 2725
+	0    1    -1   0   
+$EndComp
+$Comp
+L GND #PWR91
+U 1 1 5AB9584B
+P 5925 2025
+F 0 "#PWR91" H 5925 1775 50  0001 C CNN
+F 1 "GND" V 5925 1825 50  0000 C CNN
+F 2 "" H 5925 2025 50  0001 C CNN
+F 3 "" H 5925 2025 50  0001 C CNN
+	1    5925 2025
+	0    1    -1   0   
+$EndComp
+Text GLabel 5925 5225 0    60   Input ~ 0
++3V3_TFT
+Wire Wire Line
+	5925 2025 6025 2025
+Wire Wire Line
+	5925 2225 6025 2225
+Wire Wire Line
+	5925 2325 6025 2325
+Wire Wire Line
+	5925 2425 6025 2425
+Wire Wire Line
+	5925 2525 6025 2525
+Wire Wire Line
+	6025 2625 5925 2625
+Wire Wire Line
+	5925 2725 6025 2725
+Wire Wire Line
+	5925 2825 6025 2825
+Wire Wire Line
+	5925 2925 6025 2925
+Wire Wire Line
+	5925 3025 6025 3025
+Wire Wire Line
+	5925 3125 6025 3125
+Wire Wire Line
+	5925 3225 6025 3225
+Wire Wire Line
+	5925 3325 6025 3325
+Wire Wire Line
+	5925 3425 6025 3425
+Wire Wire Line
+	5925 3525 6025 3525
+Wire Wire Line
+	5925 3625 6025 3625
+Wire Wire Line
+	5925 3725 6025 3725
+Wire Wire Line
+	5925 3825 6025 3825
+Wire Wire Line
+	5925 3925 6025 3925
+Wire Wire Line
+	5925 4025 6025 4025
+Wire Wire Line
+	5925 4125 6025 4125
+Wire Wire Line
+	5925 4225 6025 4225
+Wire Wire Line
+	5925 4325 6025 4325
+Wire Wire Line
+	5925 4425 6025 4425
+Wire Wire Line
+	5925 4525 6025 4525
+Wire Wire Line
+	5925 4625 6025 4625
+Wire Wire Line
+	5925 4725 6025 4725
+Wire Wire Line
+	5925 4825 6025 4825
+Wire Wire Line
+	5925 4925 6025 4925
+Wire Wire Line
+	5925 5025 6025 5025
+Wire Wire Line
+	5925 5125 6025 5125
+Wire Wire Line
+	5925 5225 6025 5225
+Wire Wire Line
+	5925 5325 6025 5325
+Wire Wire Line
+	5925 5425 6025 5425
+Wire Wire Line
+	5925 5525 6025 5525
+$Comp
+L +3V3 #PWR83
+U 1 1 5AB9671A
+P 900 775
+F 0 "#PWR83" H 900 625 50  0001 C CNN
+F 1 "+3V3" V 925 975 50  0000 C CNN
+F 2 "" H 900 775 50  0001 C CNN
+F 3 "" H 900 775 50  0001 C CNN
+	1    900  775 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Ferrite_Bead_Small L10
+U 1 1 5AB9678B
+P 1350 775
+F 0 "L10" V 1450 825 50  0000 L CNN
+F 1 "220R" V 1225 625 50  0000 L CNN
+F 2 "" V 1280 775 50  0001 C CNN
+F 3 "" H 1350 775 50  0001 C CNN
+	1    1350 775 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L C_Small C98
+U 1 1 5AB967F0
+P 1075 950
+F 0 "C98" H 1085 1020 50  0000 L CNN
+F 1 "10nF" H 1085 870 50  0000 L CNN
+F 2 "" H 1075 950 50  0001 C CNN
+F 3 "" H 1075 950 50  0001 C CNN
+	1    1075 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C99
+U 1 1 5AB9683F
+P 1625 950
+F 0 "C99" H 1635 1020 50  0000 L CNN
+F 1 "4.7uF" H 1635 870 50  0000 L CNN
+F 2 "" H 1625 950 50  0001 C CNN
+F 3 "" H 1625 950 50  0001 C CNN
+	1    1625 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C100
+U 1 1 5AB96876
+P 1950 950
+F 0 "C100" H 1960 1020 50  0000 L CNN
+F 1 "10nF" H 1960 870 50  0000 L CNN
+F 2 "" H 1950 950 50  0001 C CNN
+F 3 "" H 1950 950 50  0001 C CNN
+	1    1950 950 
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR84
+U 1 1 5AB9699B
+P 1075 1125
+F 0 "#PWR84" H 1075 875 50  0001 C CNN
+F 1 "GND" H 1075 975 50  0000 C CNN
+F 2 "" H 1075 1125 50  0001 C CNN
+F 3 "" H 1075 1125 50  0001 C CNN
+	1    1075 1125
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR85
+U 1 1 5AB969B9
+P 1625 1125
+F 0 "#PWR85" H 1625 875 50  0001 C CNN
+F 1 "GND" H 1625 975 50  0000 C CNN
+F 2 "" H 1625 1125 50  0001 C CNN
+F 3 "" H 1625 1125 50  0001 C CNN
+	1    1625 1125
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR86
+U 1 1 5AB969D7
+P 1950 1125
+F 0 "#PWR86" H 1950 875 50  0001 C CNN
+F 1 "GND" H 1950 975 50  0000 C CNN
+F 2 "" H 1950 1125 50  0001 C CNN
+F 3 "" H 1950 1125 50  0001 C CNN
+	1    1950 1125
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	900  775  1250 775 
+Wire Wire Line
+	1075 775  1075 850 
+Connection ~ 1075 775 
+Wire Wire Line
+	1450 775  2150 775 
+Wire Wire Line
+	1625 775  1625 850 
+Wire Wire Line
+	1075 1125 1075 1050
+Wire Wire Line
+	1625 1125 1625 1050
+Wire Wire Line
+	1950 775  1950 850 
+Connection ~ 1625 775 
+Wire Wire Line
+	1950 1050 1950 1125
+Text GLabel 2150 775  2    60   Output ~ 0
++3V3_TFT
+Connection ~ 1950 775 
+$Comp
+L R_Pack04 RN14
+U 1 1 5AB97052
+P 1900 2625
+F 0 "RN14" V 1600 2625 50  0000 C CNN
+F 1 "51R" V 2100 2625 50  0000 C CNN
+F 2 "" V 2175 2625 50  0001 C CNN
+F 3 "" H 1900 2625 50  0001 C CNN
+	1    1900 2625
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Pack04 RN15
+U 1 1 5AB970C7
+P 1900 3400
+F 0 "RN15" V 1600 3400 50  0000 C CNN
+F 1 "51R" V 2100 3400 50  0000 C CNN
+F 2 "" V 2175 3400 50  0001 C CNN
+F 3 "" H 1900 3400 50  0001 C CNN
+	1    1900 3400
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Pack04 RN16
+U 1 1 5AB9723A
+P 1900 4175
+F 0 "RN16" V 1600 4175 50  0000 C CNN
+F 1 "51R" V 2100 4175 50  0000 C CNN
+F 2 "" V 2175 4175 50  0001 C CNN
+F 3 "" H 1900 4175 50  0001 C CNN
+	1    1900 4175
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Pack04 RN17
+U 1 1 5AB97385
+P 1900 4950
+F 0 "RN17" V 1600 4950 50  0000 C CNN
+F 1 "51R" V 2100 4950 50  0000 C CNN
+F 2 "" V 2175 4950 50  0001 C CNN
+F 3 "" H 1900 4950 50  0001 C CNN
+	1    1900 4950
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Pack04 RN18
+U 1 1 5AB984F2
+P 1900 5750
+F 0 "RN18" V 1600 5750 50  0000 C CNN
+F 1 "51R" V 2100 5750 50  0000 C CNN
+F 2 "" V 2175 5750 50  0001 C CNN
+F 3 "" H 1900 5750 50  0001 C CNN
+	1    1900 5750
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Pack04 RN19
+U 1 1 5AB984F8
+P 1900 6525
+F 0 "RN19" V 1600 6525 50  0000 C CNN
+F 1 "51R" V 2100 6525 50  0000 C CNN
+F 2 "" V 2175 6525 50  0001 C CNN
+F 3 "" H 1900 6525 50  0001 C CNN
+	1    1900 6525
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Pack04 RN20
+U 1 1 5AB984FE
+P 1900 7300
+F 0 "RN20" V 1600 7300 50  0000 C CNN
+F 1 "51R" V 2100 7300 50  0000 C CNN
+F 2 "" V 2175 7300 50  0001 C CNN
+F 3 "" H 1900 7300 50  0001 C CNN
+	1    1900 7300
+	0    1    1    0   
+$EndComp
+Text GLabel 1575 7400 0    60   Input ~ 0
+LCD_R0
+Text GLabel 1575 7300 0    60   Input ~ 0
+LCD_R2
+Text GLabel 1575 7200 0    60   Input ~ 0
+LCD_R4
+Text GLabel 1575 7100 0    60   Input ~ 0
+LCD_R6
+Text GLabel 1575 6625 0    60   Input ~ 0
+LCD_R1
+Text GLabel 1575 6525 0    60   Input ~ 0
+LCD_R3
+Text GLabel 1575 6425 0    60   Input ~ 0
+LCD_R5
+Text GLabel 1575 6325 0    60   Input ~ 0
+LCD_R7
+Text GLabel 1575 5850 0    60   Input ~ 0
+LCD_G0
+Text GLabel 1575 5750 0    60   Input ~ 0
+LCD_G2
+Text GLabel 1575 5650 0    60   Input ~ 0
+LCD_G4
+Text GLabel 1575 5550 0    60   Input ~ 0
+LCD_G6
+Text GLabel 1575 5050 0    60   Input ~ 0
+LCD_G1
+Text GLabel 1575 4950 0    60   Input ~ 0
+LCD_G3
+Text GLabel 1575 4850 0    60   Input ~ 0
+LCD_G5
+Text GLabel 1575 4750 0    60   Input ~ 0
+LCD_G7
+Text GLabel 1575 4275 0    60   Input ~ 0
+LCD_B0
+Text GLabel 1575 4175 0    60   Input ~ 0
+LCD_B2
+Text GLabel 1575 4075 0    60   Input ~ 0
+LCD_B4
+Text GLabel 1575 3975 0    60   Input ~ 0
+LCD_B6
+Text GLabel 1575 3500 0    60   Input ~ 0
+LCD_B1
+Text GLabel 1575 3400 0    60   Input ~ 0
+LCD_B3
+Text GLabel 1575 3300 0    60   Input ~ 0
+LCD_B5
+Text GLabel 1575 3200 0    60   Input ~ 0
+LCD_B7
+$Comp
+L R_Pack04 RN13
+U 1 1 5AB9F8D3
+P 1900 1875
+F 0 "RN13" V 1600 1875 50  0000 C CNN
+F 1 "51R" V 2100 1875 50  0000 C CNN
+F 2 "" V 2175 1875 50  0001 C CNN
+F 3 "" H 1900 1875 50  0001 C CNN
+	1    1900 1875
+	0    1    1    0   
+$EndComp
+Text GLabel 1575 2725 0    60   Input ~ 0
+LCD_VSYNC
+Text GLabel 1550 1975 0    60   Input ~ 0
+LCD_CLK
+Text GLabel 1550 1875 0    60   Input ~ 0
+LCD_HSYNC
+Text GLabel 1550 1775 0    60   Input ~ 0
+LCD_DE
+Wire Wire Line
+	1700 1875 1550 1875
+Wire Wire Line
+	1550 1975 1700 1975
+Wire Wire Line
+	1575 2725 1700 2725
+Wire Wire Line
+	1575 3200 1700 3200
+Wire Wire Line
+	1700 3300 1575 3300
+Wire Wire Line
+	1575 3400 1700 3400
+Wire Wire Line
+	1575 3500 1700 3500
+Wire Wire Line
+	1575 3975 1700 3975
+Text GLabel 2200 1775 2    60   Output ~ 0
+TFT_DEN
+Text GLabel 2200 1875 2    60   Output ~ 0
+TFT_HSD
+Text GLabel 2200 1975 2    60   Output ~ 0
+TFT_CLKIN
+Text GLabel 2200 2725 2    60   Output ~ 0
+TFT_VSD
+Text GLabel 2200 3200 2    60   Output ~ 0
+TFT_B7
+Text GLabel 2200 3300 2    60   Output ~ 0
+TFT_B5
+Text GLabel 2200 3400 2    60   Output ~ 0
+TFT_B3
+Text GLabel 2200 3500 2    60   Output ~ 0
+TFT_B1
+Text GLabel 2200 3975 2    60   Output ~ 0
+TFT_B6
+Text GLabel 2200 4075 2    60   Output ~ 0
+TFT_B4
+Text GLabel 2200 4175 2    60   Output ~ 0
+TFT_B2
+Text GLabel 2200 4275 2    60   Output ~ 0
+TFT_B0
+Text GLabel 2200 4750 2    60   Output ~ 0
+TFT_G7
+Text GLabel 2200 4850 2    60   Output ~ 0
+TFT_G5
+Text GLabel 2200 4950 2    60   Output ~ 0
+TFT_G3
+Text GLabel 2200 5050 2    60   Output ~ 0
+TFT_G1
+Text GLabel 2200 5550 2    60   Output ~ 0
+TFT_G6
+Text GLabel 2200 5650 2    60   Output ~ 0
+TFT_G4
+Text GLabel 2200 5750 2    60   Output ~ 0
+TFT_G2
+Text GLabel 2200 5850 2    60   Output ~ 0
+TFT_G0
+Text GLabel 2200 6325 2    60   Output ~ 0
+TFT_R7
+Text GLabel 2200 6425 2    60   Output ~ 0
+TFT_R5
+Text GLabel 2200 6525 2    60   Output ~ 0
+TFT_R3
+Text GLabel 2200 6625 2    60   Output ~ 0
+TFT_R1
+Text GLabel 2200 7100 2    60   Output ~ 0
+TFT_R6
+Text GLabel 2200 7200 2    60   Output ~ 0
+TFT_R4
+Text GLabel 2200 7300 2    60   Output ~ 0
+TFT_R2
+Text GLabel 2200 7400 2    60   Output ~ 0
+TFT_R0
+Wire Wire Line
+	2100 1775 2200 1775
+Wire Wire Line
+	2100 1875 2200 1875
+Wire Wire Line
+	2100 1975 2200 1975
+Wire Wire Line
+	2100 2725 2200 2725
+Wire Wire Line
+	2100 3200 2200 3200
+Wire Wire Line
+	2100 3300 2200 3300
+Wire Wire Line
+	2100 3400 2200 3400
+Wire Wire Line
+	2100 3500 2200 3500
+Wire Wire Line
+	2100 3975 2200 3975
+Wire Wire Line
+	2100 4075 2200 4075
+Wire Wire Line
+	2100 4175 2200 4175
+Wire Wire Line
+	2100 4275 2200 4275
+Wire Wire Line
+	2100 4750 2200 4750
+Wire Wire Line
+	2100 4850 2200 4850
+Wire Wire Line
+	2100 4950 2200 4950
+Wire Wire Line
+	2100 5050 2200 5050
+Wire Wire Line
+	2100 5550 2200 5550
+Wire Wire Line
+	2100 5650 2200 5650
+Wire Wire Line
+	2100 5750 2200 5750
+Wire Wire Line
+	2100 5850 2200 5850
+Wire Wire Line
+	2100 6325 2200 6325
+Wire Wire Line
+	2100 6425 2200 6425
+Wire Wire Line
+	2100 6525 2200 6525
+Wire Wire Line
+	2100 6625 2200 6625
+Wire Wire Line
+	2100 7100 2200 7100
+Wire Wire Line
+	2100 7200 2200 7200
+Wire Wire Line
+	2100 7300 2200 7300
+Wire Wire Line
+	2100 7400 2200 7400
+Wire Wire Line
+	1575 4075 1700 4075
+Wire Wire Line
+	1575 4175 1700 4175
+Wire Wire Line
+	1575 4275 1700 4275
+Wire Wire Line
+	1575 4750 1700 4750
+Wire Wire Line
+	1575 4850 1700 4850
+Wire Wire Line
+	1575 4950 1700 4950
+Wire Wire Line
+	1575 5050 1700 5050
+Wire Wire Line
+	1575 5550 1700 5550
+Wire Wire Line
+	1575 5650 1700 5650
+Wire Wire Line
+	1575 5750 1700 5750
+Wire Wire Line
+	1575 5850 1700 5850
+Wire Wire Line
+	1575 6325 1700 6325
+Wire Wire Line
+	1575 6425 1700 6425
+Wire Wire Line
+	1575 6525 1700 6525
+Wire Wire Line
+	1575 6625 1700 6625
+Wire Wire Line
+	1575 7100 1700 7100
+Wire Wire Line
+	1575 7200 1700 7200
+Wire Wire Line
+	1575 7300 1700 7300
+Wire Wire Line
+	1575 7400 1700 7400
+$Comp
+L TVS_8-Channel D6
+U 1 1 5ABA9419
+P 4350 2125
+F 0 "D6" H 4150 2675 60  0000 C CNN
+F 1 "DT1240A-08LP3810" H 4350 1525 60  0000 C CNN
+F 2 "" H 4100 1625 60  0001 C CNN
+F 3 "" H 4100 1625 60  0001 C CNN
+	1    4350 2125
+	1    0    0    -1  
+$EndComp
+$Comp
+L TVS_8-Channel D7
+U 1 1 5ABA97F4
+P 4350 3650
+F 0 "D7" H 4150 4200 60  0000 C CNN
+F 1 "DT1240A-08LP3810" H 4350 3050 60  0000 C CNN
+F 2 "" H 4100 3150 60  0001 C CNN
+F 3 "" H 4100 3150 60  0001 C CNN
+	1    4350 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L TVS_8-Channel D8
+U 1 1 5ABA98A3
+P 4350 5200
+F 0 "D8" H 4150 5750 60  0000 C CNN
+F 1 "DT1240A-08LP3810" H 4350 4600 60  0000 C CNN
+F 2 "" H 4100 4700 60  0001 C CNN
+F 3 "" H 4100 4700 60  0001 C CNN
+	1    4350 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L TVS_8-Channel D9
+U 1 1 5ABA9A40
+P 4350 6775
+F 0 "D9" H 4150 7325 60  0000 C CNN
+F 1 "DT1240A-08LP3810" H 4350 6175 60  0000 C CNN
+F 2 "" H 4100 6275 60  0001 C CNN
+F 3 "" H 4100 6275 60  0001 C CNN
+	1    4350 6775
+	1    0    0    -1  
+$EndComp
+Text GLabel 3825 1725 0    60   Input ~ 0
+TFT_DEN
+Text GLabel 3825 1825 0    60   Input ~ 0
+TFT_HSD
+Text GLabel 3825 1925 0    60   Input ~ 0
+TFT_CLKIN
+Text GLabel 3825 2225 0    60   Input ~ 0
+TFT_B7
+Text GLabel 3825 2325 0    60   Input ~ 0
+TFT_B5
+Text GLabel 3825 2425 0    60   Input ~ 0
+TFT_B3
+Text GLabel 3825 2525 0    60   Input ~ 0
+TFT_B1
+Text GLabel 3825 3250 0    60   Output ~ 0
+TFT_VSD
+Text GLabel 3825 3750 0    60   Input ~ 0
+TFT_B6
+Text GLabel 3825 3850 0    60   Input ~ 0
+TFT_B4
+Text GLabel 3825 3950 0    60   Input ~ 0
+TFT_B2
+Text GLabel 3825 4050 0    60   Input ~ 0
+TFT_B0
+Text GLabel 3825 4800 0    60   Input ~ 0
+TFT_G7
+Text GLabel 3825 4900 0    60   Input ~ 0
+TFT_G5
+Text GLabel 3825 5000 0    60   Input ~ 0
+TFT_G3
+Text GLabel 3825 5100 0    60   Input ~ 0
+TFT_G1
+Text GLabel 3800 6375 0    60   Input ~ 0
+TFT_G6
+Text GLabel 3800 6475 0    60   Input ~ 0
+TFT_G4
+Text GLabel 3800 6575 0    60   Input ~ 0
+TFT_G2
+Text GLabel 3800 6675 0    60   Input ~ 0
+TFT_G0
+Text GLabel 3825 5300 0    60   Input ~ 0
+TFT_R7
+Text GLabel 3825 5400 0    60   Input ~ 0
+TFT_R5
+Text GLabel 3825 5500 0    60   Input ~ 0
+TFT_R3
+Text GLabel 3825 5600 0    60   Input ~ 0
+TFT_R1
+Text GLabel 3800 6875 0    60   Input ~ 0
+TFT_R6
+Text GLabel 3800 6975 0    60   Input ~ 0
+TFT_R4
+Text GLabel 3800 7075 0    60   Input ~ 0
+TFT_R2
+Text GLabel 3800 7175 0    60   Input ~ 0
+TFT_R0
+Wire Wire Line
+	3825 1725 3900 1725
+Wire Wire Line
+	3825 1825 3900 1825
+Wire Wire Line
+	3825 1925 3900 1925
+Wire Wire Line
+	3825 2225 3900 2225
+Wire Wire Line
+	3825 2325 3900 2325
+Wire Wire Line
+	3825 2425 3900 2425
+Wire Wire Line
+	3825 2525 3900 2525
+Wire Wire Line
+	3825 3250 3900 3250
+Wire Wire Line
+	3825 3750 3900 3750
+Wire Wire Line
+	3825 3850 3900 3850
+Wire Wire Line
+	3825 3950 3900 3950
+Wire Wire Line
+	3825 4050 3900 4050
+Wire Wire Line
+	3825 4800 3900 4800
+Wire Wire Line
+	3825 4900 3900 4900
+Wire Wire Line
+	3825 5000 3900 5000
+Wire Wire Line
+	3825 5100 3900 5100
+Wire Wire Line
+	3825 5300 3900 5300
+Wire Wire Line
+	3825 5400 3900 5400
+Wire Wire Line
+	3825 5500 3900 5500
+Wire Wire Line
+	3825 5600 3900 5600
+Wire Wire Line
+	3800 6375 3900 6375
+Wire Wire Line
+	3800 6475 3900 6475
+Wire Wire Line
+	3800 6575 3900 6575
+Wire Wire Line
+	3800 6675 3900 6675
+Wire Wire Line
+	3800 6875 3900 6875
+Wire Wire Line
+	3800 6975 3900 6975
+Wire Wire Line
+	3800 7075 3900 7075
+Wire Wire Line
+	3800 7175 3900 7175
+$Comp
+L GND #PWR88
+U 1 1 5ABB29AB
+P 3875 2125
+F 0 "#PWR88" H 3875 1875 50  0001 C CNN
+F 1 "GND" V 3875 1925 50  0000 C CNN
+F 2 "" H 3875 2125 50  0001 C CNN
+F 3 "" H 3875 2125 50  0001 C CNN
+	1    3875 2125
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3875 2125 3900 2125
+$Comp
+L GND #PWR89
+U 1 1 5ABB2CDD
+P 3875 3650
+F 0 "#PWR89" H 3875 3400 50  0001 C CNN
+F 1 "GND" V 3875 3450 50  0000 C CNN
+F 2 "" H 3875 3650 50  0001 C CNN
+F 3 "" H 3875 3650 50  0001 C CNN
+	1    3875 3650
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR90
+U 1 1 5ABB3065
+P 3875 5200
+F 0 "#PWR90" H 3875 4950 50  0001 C CNN
+F 1 "GND" V 3875 5000 50  0000 C CNN
+F 2 "" H 3875 5200 50  0001 C CNN
+F 3 "" H 3875 5200 50  0001 C CNN
+	1    3875 5200
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR87
+U 1 1 5ABB33CB
+P 3850 6775
+F 0 "#PWR87" H 3850 6525 50  0001 C CNN
+F 1 "GND" V 3850 6575 50  0000 C CNN
+F 2 "" H 3850 6775 50  0001 C CNN
+F 3 "" H 3850 6775 50  0001 C CNN
+	1    3850 6775
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	3875 3650 3900 3650
+Wire Wire Line
+	3875 5200 3900 5200
+Wire Wire Line
+	3850 6775 3900 6775
+$Comp
+L Conn_01x06_Female J3
+U 1 1 5ABC116D
+P 10400 3300
+F 0 "J3" H 10400 3600 50  0000 C CNN
+F 1 "Conn_01x06_Female" H 10400 2900 50  0000 C CNN
+F 2 "" H 10400 3300 50  0001 C CNN
+F 3 "" H 10400 3300 50  0001 C CNN
+	1    10400 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L TVS_8-Channel D10
+U 1 1 5ABC1710
+P 10125 2000
+F 0 "D10" H 9925 2550 60  0000 C CNN
+F 1 "DT1240A-08LP3810" H 10125 1400 60  0000 C CNN
+F 2 "" H 9875 1500 60  0001 C CNN
+F 3 "" H 9875 1500 60  0001 C CNN
+	1    10125 2000
+	1    0    0    -1  
+$EndComp
+Text GLabel 10100 3100 0    60   Input ~ 0
+TFT_NRESET
+Text GLabel 10100 3200 0    60   Output ~ 0
+TFT_NINT
+Text GLabel 10100 3300 0    60   BiDi ~ 0
+TFT_SDA
+Text GLabel 10100 3400 0    60   BiDi ~ 0
+TFT_SCL
+$Comp
+L GND #PWR95
+U 1 1 5ABC279B
+P 10150 3500
+F 0 "#PWR95" H 10150 3250 50  0001 C CNN
+F 1 "GND" V 10150 3300 50  0000 C CNN
+F 2 "" H 10150 3500 50  0001 C CNN
+F 3 "" H 10150 3500 50  0001 C CNN
+	1    10150 3500
+	0    1    1    0   
+$EndComp
+Text GLabel 10100 3600 0    60   Input ~ 0
++3V3_TFT
+Wire Wire Line
+	10100 3600 10200 3600
+Wire Wire Line
+	10150 3500 10200 3500
+Wire Wire Line
+	10100 3400 10200 3400
+Wire Wire Line
+	10100 3300 10200 3300
+Wire Wire Line
+	10100 3200 10200 3200
+Wire Wire Line
+	10100 3100 10200 3100
+Text GLabel 9525 1650 0    60   Input ~ 0
+TFT_NRESET
+Text GLabel 9525 1850 0    60   Output ~ 0
+TFT_NINT
+Text GLabel 9525 2150 0    60   BiDi ~ 0
+TFT_SDA
+Text GLabel 9525 2350 0    60   BiDi ~ 0
+TFT_SCL
+Wire Wire Line
+	9525 1650 9600 1650
+Wire Wire Line
+	9600 1600 9600 1700
+Wire Wire Line
+	9600 1600 9675 1600
+Wire Wire Line
+	9600 1700 9675 1700
+Connection ~ 9600 1650
+Wire Wire Line
+	9525 1850 9600 1850
+Wire Wire Line
+	9600 1800 9600 1900
+Wire Wire Line
+	9600 1800 9675 1800
+Wire Wire Line
+	9600 1900 9675 1900
+Connection ~ 9600 1850
+Wire Wire Line
+	9525 2150 9600 2150
+Wire Wire Line
+	9600 2100 9600 2200
+Wire Wire Line
+	9600 2100 9675 2100
+Wire Wire Line
+	9600 2200 9675 2200
+Connection ~ 9600 2150
+Wire Wire Line
+	9525 2350 9600 2350
+Wire Wire Line
+	9600 2300 9600 2400
+Wire Wire Line
+	9600 2300 9675 2300
+Wire Wire Line
+	9600 2400 9675 2400
+Connection ~ 9600 2350
+$Comp
+L GND #PWR94
+U 1 1 5ABC535D
+P 9600 2000
+F 0 "#PWR94" H 9600 1750 50  0001 C CNN
+F 1 "GND" V 9600 1800 50  0000 C CNN
+F 2 "" H 9600 2000 50  0001 C CNN
+F 3 "" H 9600 2000 50  0001 C CNN
+	1    9600 2000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	9600 2000 9675 2000
+$Comp
+L R_Pack04 RN21
+U 1 1 5ABC6DD1
+P 7800 1850
+F 0 "RN21" V 7500 1850 50  0000 C CNN
+F 1 "51R" V 8000 1850 50  0000 C CNN
+F 2 "" V 8075 1850 50  0001 C CNN
+F 3 "" H 7800 1850 50  0001 C CNN
+	1    7800 1850
+	0    1    1    0   
+$EndComp
+Text GLabel 8100 1650 2    60   Output ~ 0
+TFT_NRESET
+Text GLabel 8100 1750 2    60   Input ~ 0
+TFT_NINT
+Text GLabel 8100 1850 2    60   BiDi ~ 0
+TFT_SDA
+Text GLabel 8100 1950 2    60   BiDi ~ 0
+TFT_SCL
+Wire Wire Line
+	8000 1950 8100 1950
+Wire Wire Line
+	8000 1850 8100 1850
+Wire Wire Line
+	8000 1750 8100 1750
+Wire Wire Line
+	8000 1650 8100 1650
+Text GLabel 7500 1850 0    60   BiDi ~ 0
+I2C1_SCL
+Text GLabel 7500 1950 0    60   BiDi ~ 0
+I2C1_SDA
+Text GLabel 7500 1650 0    60   Input ~ 0
+TOUCH_NRESET
+Text GLabel 7500 1750 0    60   Output ~ 0
+TOUCH_NINT
+Wire Wire Line
+	7500 1650 7600 1650
+Wire Wire Line
+	7500 1750 7600 1750
+Wire Wire Line
+	7500 1850 7600 1850
+Wire Wire Line
+	7500 1950 7600 1950
+Wire Wire Line
+	1550 1775 1700 1775
+Text Notes 8125 7650 0    60   ~ 0
+23/03/2018
+Text Notes 10575 7625 0    60   ~ 0
+1
+Text Notes 7350 7500 0    60   ~ 0
+Mini PCI-e Audio Processor
+Text Notes 10300 7500 0    60   ~ 0
+By Jesse Spiessens
+$EndSCHEMATC
