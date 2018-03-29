@@ -1,4 +1,4 @@
-update=23/03/2018 13:53:23
+update=29/03/2018 01:46:00
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,6 +25,16 @@ version=1
 NetIExt=net
 [general]
 version=1
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceForceRefPrefix=0
+SpiceUseNetNumbers=0
+LabSize=60
 [eeschema]
 version=1
 LibDir=../Ki-Lib/Symbol
@@ -72,13 +82,4 @@ LibName40=CONNECTOR
 LibName41=POWER_SW
 LibName42=EMI_GASKET
 LibName43=LED
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
+LibName44=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/test
