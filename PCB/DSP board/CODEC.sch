@@ -124,11 +124,11 @@ Text GLabel 1225 1450 0    60   Input ~ 0
 SAI2_MCK_B
 Text GLabel 1225 1550 0    60   Output ~ 0
 SAI2_SD_A
-Text GLabel 1225 1900 0    60   Input ~ 0
-SAI2_SD_B
 Text GLabel 1225 2000 0    60   Input ~ 0
-SAI2_SCK_B
+SAI2_SD_B
 Text GLabel 1225 2100 0    60   Input ~ 0
+SAI2_SCK_B
+Text GLabel 1225 2200 0    60   Input ~ 0
 SAI2_FS_B
 Text GLabel 1825 1250 2    60   Output ~ 0
 ADC_LRCK
@@ -138,11 +138,11 @@ Text GLabel 1825 1450 2    60   Output ~ 0
 CODEC_MCLK
 Text GLabel 1825 1550 2    60   Input ~ 0
 ADC_SDOUT1
-Text GLabel 1825 1900 2    60   Output ~ 0
-DAC_SDIN1
 Text GLabel 1825 2000 2    60   Output ~ 0
-DAC_SCLK
+DAC_SDIN1
 Text GLabel 1825 2100 2    60   Output ~ 0
+DAC_SCLK
+Text GLabel 1825 2200 2    60   Output ~ 0
 DAC_LRCK
 Text GLabel 3450 2400 0    60   Input ~ 0
 ADC_LRCK
@@ -450,11 +450,11 @@ Wire Wire Line
 Wire Wire Line
 	1325 1550 1225 1550
 Wire Wire Line
-	1225 1900 1325 1900
+	1225 2000 1325 2000
 Wire Wire Line
-	1325 2000 1225 2000
+	1325 2100 1225 2100
 Wire Wire Line
-	1225 2100 1325 2100
+	1225 2200 1325 2200
 Wire Wire Line
 	1725 1250 1825 1250
 Wire Wire Line
@@ -472,11 +472,11 @@ Wire Wire Line
 Wire Wire Line
 	3450 2400 3550 2400
 Wire Wire Line
-	1725 1900 1825 1900
+	1725 2000 1825 2000
 Wire Wire Line
-	1825 2000 1725 2000
+	1825 2100 1725 2100
 Wire Wire Line
-	1725 2100 1825 2100
+	1725 2200 1825 2200
 Wire Wire Line
 	5000 1200 5100 1200
 Wire Wire Line
@@ -935,8 +935,6 @@ NoConn ~ 5000 1400
 NoConn ~ 5000 1600
 NoConn ~ 5000 1800
 NoConn ~ 5000 3800
-NoConn ~ 1725 2200
-NoConn ~ 1325 2200
 NoConn ~ 3550 2800
 NoConn ~ 3550 3000
 NoConn ~ 3550 3200
@@ -951,4 +949,6 @@ F 3 "" H 8550 2800 50  0001 C CNN
 	1    8550 2800
 	1    0    0    -1  
 $EndComp
+NoConn ~ 1325 1900
+NoConn ~ 1725 1900
 $EndSCHEMATC

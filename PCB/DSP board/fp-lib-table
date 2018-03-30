@@ -11,4 +11,5 @@
   (lib (name Switch)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/Switch.pretty")(options "")(descr ""))
   (lib (name PCI-e)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/PCI-e.pretty")(options "")(descr ""))
   (lib (name 1775862-2)(type Legacy)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/1775862-2.mod")(options "")(descr ""))
+  (lib (name TSOP-5)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/TSOP-5.pretty")(options "")(descr ""))
 )
