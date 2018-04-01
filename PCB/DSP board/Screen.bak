@@ -421,13 +421,13 @@ F 3 "" H 1900 7300 50  0001 C CNN
 	1    1900 7300
 	0    1    1    0   
 $EndComp
-Text GLabel 1575 7400 0    60   Input ~ 0
-LCD_R0
-Text GLabel 1575 7300 0    60   Input ~ 0
-LCD_R2
-Text GLabel 1575 7200 0    60   Input ~ 0
-LCD_R4
 Text GLabel 1575 7100 0    60   Input ~ 0
+LCD_R0
+Text GLabel 1575 7200 0    60   Input ~ 0
+LCD_R2
+Text GLabel 1575 7300 0    60   Input ~ 0
+LCD_R4
+Text GLabel 1575 7400 0    60   Input ~ 0
 LCD_R6
 Text GLabel 1575 6625 0    60   Input ~ 0
 LCD_R1
@@ -437,13 +437,13 @@ Text GLabel 1575 6425 0    60   Input ~ 0
 LCD_R5
 Text GLabel 1575 6325 0    60   Input ~ 0
 LCD_R7
-Text GLabel 1575 5850 0    60   Input ~ 0
-LCD_G0
-Text GLabel 1575 5750 0    60   Input ~ 0
-LCD_G2
-Text GLabel 1575 5650 0    60   Input ~ 0
-LCD_G4
 Text GLabel 1575 5550 0    60   Input ~ 0
+LCD_G0
+Text GLabel 1575 5650 0    60   Input ~ 0
+LCD_G2
+Text GLabel 1575 5750 0    60   Input ~ 0
+LCD_G4
+Text GLabel 1575 5850 0    60   Input ~ 0
 LCD_G6
 Text GLabel 1575 5050 0    60   Input ~ 0
 LCD_G1
@@ -536,13 +536,13 @@ Text GLabel 2200 4950 2    60   Output ~ 0
 TFT_G3
 Text GLabel 2200 5050 2    60   Output ~ 0
 TFT_G1
-Text GLabel 2200 5550 2    60   Output ~ 0
-TFT_G6
-Text GLabel 2200 5650 2    60   Output ~ 0
-TFT_G4
-Text GLabel 2200 5750 2    60   Output ~ 0
-TFT_G2
 Text GLabel 2200 5850 2    60   Output ~ 0
+TFT_G6
+Text GLabel 2200 5750 2    60   Output ~ 0
+TFT_G4
+Text GLabel 2200 5650 2    60   Output ~ 0
+TFT_G2
+Text GLabel 2200 5550 2    60   Output ~ 0
 TFT_G0
 Text GLabel 2200 6325 2    60   Output ~ 0
 TFT_R7
@@ -552,13 +552,13 @@ Text GLabel 2200 6525 2    60   Output ~ 0
 TFT_R3
 Text GLabel 2200 6625 2    60   Output ~ 0
 TFT_R1
-Text GLabel 2200 7100 2    60   Output ~ 0
-TFT_R6
-Text GLabel 2200 7200 2    60   Output ~ 0
-TFT_R4
-Text GLabel 2200 7300 2    60   Output ~ 0
-TFT_R2
 Text GLabel 2200 7400 2    60   Output ~ 0
+TFT_R6
+Text GLabel 2200 7300 2    60   Output ~ 0
+TFT_R4
+Text GLabel 2200 7200 2    60   Output ~ 0
+TFT_R2
+Text GLabel 2200 7100 2    60   Output ~ 0
 TFT_R0
 Wire Wire Line
 	2100 1775 2200 1775
@@ -917,11 +917,11 @@ Wire Wire Line
 	10100 3200 10200 3200
 Wire Wire Line
 	10100 3100 10200 3100
-Text GLabel 9525 1650 0    60   Input ~ 0
+Text GLabel 9525 1850 0    60   Input ~ 0
 TFT_NRESET
-Text GLabel 9525 1850 0    60   Output ~ 0
+Text GLabel 9525 2150 0    60   Output ~ 0
 TFT_NINT
-Text GLabel 9525 2150 0    60   BiDi ~ 0
+Text GLabel 9525 1650 0    60   BiDi ~ 0
 TFT_SDA
 Text GLabel 9525 2350 0    60   BiDi ~ 0
 TFT_SCL
@@ -985,13 +985,13 @@ F 3 "" H 7800 1850 50  0001 C CNN
 	1    7800 1850
 	0    1    1    0   
 $EndComp
-Text GLabel 8100 1950 2    60   Output ~ 0
+Text GLabel 8100 1750 2    60   Output ~ 0
 TFT_NRESET
-Text GLabel 8100 1650 2    60   Input ~ 0
+Text GLabel 8100 1850 2    60   Input ~ 0
 TFT_NINT
-Text GLabel 8100 1850 2    60   BiDi ~ 0
+Text GLabel 8100 1650 2    60   BiDi ~ 0
 TFT_SDA
-Text GLabel 8100 1750 2    60   BiDi ~ 0
+Text GLabel 8100 1950 2    60   BiDi ~ 0
 TFT_SCL
 Wire Wire Line
 	8000 1950 8100 1950
@@ -1001,13 +1001,13 @@ Wire Wire Line
 	8000 1750 8100 1750
 Wire Wire Line
 	8000 1650 8100 1650
-Text GLabel 7500 1750 0    60   BiDi ~ 0
+Text GLabel 7500 1950 0    60   BiDi ~ 0
 I2C1_SCL
-Text GLabel 7500 1850 0    60   BiDi ~ 0
+Text GLabel 7500 1650 0    60   BiDi ~ 0
 I2C1_SDA
-Text GLabel 7500 1950 0    60   Input ~ 0
+Text GLabel 7500 1750 0    60   Input ~ 0
 TOUCH_NRESET
-Text GLabel 7500 1650 0    60   Output ~ 0
+Text GLabel 7500 1850 0    60   Output ~ 0
 TOUCH_NINT
 Wire Wire Line
 	7500 1650 7600 1650

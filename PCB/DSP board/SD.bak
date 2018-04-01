@@ -90,29 +90,29 @@ F 3 "" H 6275 975 60  0001 C CNN
 	1    6525 1475
 	1    0    0    -1  
 $EndComp
-Text GLabel 3950 1075 0    60   BiDi ~ 0
+Text GLabel 3950 1375 0    60   BiDi ~ 0
 SDMMC1_D2
 Text GLabel 3950 1175 0    60   BiDi ~ 0
 SDMMC1_D3
-Text GLabel 3950 1375 0    60   Input ~ 0
+Text GLabel 3950 1075 0    60   Input ~ 0
 SDMMC1_CMD
-Text GLabel 3950 1775 0    60   Input ~ 0
+Text GLabel 3950 2075 0    60   Input ~ 0
 SDMMC1_CK
-Text GLabel 3950 1875 0    60   BiDi ~ 0
-SDMMC1_D0
 Text GLabel 3950 1975 0    60   BiDi ~ 0
+SDMMC1_D0
+Text GLabel 3950 1875 0    60   BiDi ~ 0
 SDMMC1_D1
-Text GLabel 4550 1075 2    60   BiDi ~ 0
+Text GLabel 4550 1375 2    60   BiDi ~ 0
 SD_DAT2
 Text GLabel 4550 1175 2    60   BiDi ~ 0
 SD_DAT3
-Text GLabel 4550 1375 2    60   Output ~ 0
+Text GLabel 4550 1075 2    60   Output ~ 0
 SD_CMD
-Text GLabel 4550 1775 2    60   Output ~ 0
+Text GLabel 4550 2075 2    60   Output ~ 0
 SD_CLK
-Text GLabel 4550 1875 2    60   BiDi ~ 0
-SD_DAT0
 Text GLabel 4550 1975 2    60   BiDi ~ 0
+SD_DAT0
+Text GLabel 4550 1875 2    60   BiDi ~ 0
 SD_DAT1
 Text GLabel 5950 1075 0    60   BiDi ~ 0
 SD_DAT2
@@ -278,9 +278,9 @@ F 3 "" H 4250 1975 50  0001 C CNN
 $EndComp
 Text GLabel 5950 1875 0    60   Input ~ 0
 SD_DETECT
-Text GLabel 4550 2075 2    60   Input ~ 0
+Text GLabel 4550 1775 2    60   Input ~ 0
 SD_DETECT
-Text GLabel 3950 2075 0    60   Output ~ 0
+Text GLabel 3950 1775 0    60   Output ~ 0
 SDMMC1_DETECT
 $Comp
 L C_Small C804

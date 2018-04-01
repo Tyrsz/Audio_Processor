@@ -917,11 +917,11 @@ Wire Wire Line
 	10100 3200 10200 3200
 Wire Wire Line
 	10100 3100 10200 3100
-Text GLabel 9525 1650 0    60   Input ~ 0
+Text GLabel 9525 1850 0    60   Input ~ 0
 TFT_NRESET
-Text GLabel 9525 1850 0    60   Output ~ 0
+Text GLabel 9525 2150 0    60   Output ~ 0
 TFT_NINT
-Text GLabel 9525 2150 0    60   BiDi ~ 0
+Text GLabel 9525 1650 0    60   BiDi ~ 0
 TFT_SDA
 Text GLabel 9525 2350 0    60   BiDi ~ 0
 TFT_SCL
@@ -985,13 +985,13 @@ F 3 "" H 7800 1850 50  0001 C CNN
 	1    7800 1850
 	0    1    1    0   
 $EndComp
-Text GLabel 8100 1950 2    60   Output ~ 0
+Text GLabel 8100 1750 2    60   Output ~ 0
 TFT_NRESET
-Text GLabel 8100 1650 2    60   Input ~ 0
+Text GLabel 8100 1850 2    60   Input ~ 0
 TFT_NINT
-Text GLabel 8100 1850 2    60   BiDi ~ 0
+Text GLabel 8100 1650 2    60   BiDi ~ 0
 TFT_SDA
-Text GLabel 8100 1750 2    60   BiDi ~ 0
+Text GLabel 8100 1950 2    60   BiDi ~ 0
 TFT_SCL
 Wire Wire Line
 	8000 1950 8100 1950
@@ -1001,13 +1001,13 @@ Wire Wire Line
 	8000 1750 8100 1750
 Wire Wire Line
 	8000 1650 8100 1650
-Text GLabel 7500 1750 0    60   BiDi ~ 0
+Text GLabel 7500 1950 0    60   BiDi ~ 0
 I2C1_SCL
-Text GLabel 7500 1850 0    60   BiDi ~ 0
+Text GLabel 7500 1650 0    60   BiDi ~ 0
 I2C1_SDA
-Text GLabel 7500 1950 0    60   Input ~ 0
+Text GLabel 7500 1750 0    60   Input ~ 0
 TOUCH_NRESET
-Text GLabel 7500 1650 0    60   Output ~ 0
+Text GLabel 7500 1850 0    60   Output ~ 0
 TOUCH_NINT
 Wire Wire Line
 	7500 1650 7600 1650
