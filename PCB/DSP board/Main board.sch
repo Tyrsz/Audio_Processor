@@ -507,14 +507,6 @@ Text Notes 7350 7500 0    60   ~ 0
 Mini PCI-e Audio Processor
 Text Notes 10300 7500 0    60   ~ 0
 By Jesse Spiessens
-NoConn ~ 5625 3400
-NoConn ~ 5625 3500
-NoConn ~ 5625 3600
-NoConn ~ 5625 3700
-NoConn ~ 5625 3800
-NoConn ~ 5625 3900
-NoConn ~ 5625 4000
-NoConn ~ 5625 4100
 NoConn ~ 5625 4300
 NoConn ~ 5625 4400
 NoConn ~ 5625 4500
@@ -553,4 +545,32 @@ $EndComp
 Wire Wire Line
 	9750 3800 9750 3875
 Connection ~ 9750 3875
+Wire Wire Line
+	5550 3300 5550 3700
+Wire Wire Line
+	5550 3400 5625 3400
+Connection ~ 5550 3300
+Wire Wire Line
+	5550 3500 5625 3500
+Connection ~ 5550 3400
+Wire Wire Line
+	5550 3600 5625 3600
+Connection ~ 5550 3500
+Wire Wire Line
+	5550 3700 5625 3700
+Connection ~ 5550 3600
+Wire Wire Line
+	5625 4100 5550 4100
+Wire Wire Line
+	5550 3800 5550 4200
+Connection ~ 5550 4200
+Wire Wire Line
+	5625 4000 5550 4000
+Connection ~ 5550 4100
+Wire Wire Line
+	5625 3900 5550 3900
+Connection ~ 5550 4000
+Wire Wire Line
+	5625 3800 5550 3800
+Connection ~ 5550 3900
 $EndSCHEMATC

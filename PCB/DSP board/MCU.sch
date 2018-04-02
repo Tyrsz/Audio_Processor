@@ -905,7 +905,7 @@ Wire Wire Line
 Wire Wire Line
 	3400 5425 3250 5425
 Text GLabel 3200 3075 0    60   Output ~ 0
-TFT_STBYB
+LCD_STBYB
 Wire Wire Line
 	3200 3075 3350 3075
 Text GLabel 7250 2175 0    60   Input ~ 0

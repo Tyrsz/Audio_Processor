@@ -480,7 +480,7 @@ F 3 "" H 1900 1875 50  0001 C CNN
 	1    1900 1875
 	0    1    1    0   
 $EndComp
-Text GLabel 1575 2425 0    60   Input ~ 0
+Text GLabel 1575 2525 0    60   Input ~ 0
 LCD_VSYNC
 Text GLabel 1550 1975 0    60   Input ~ 0
 LCD_CLK
@@ -510,7 +510,7 @@ Text GLabel 2200 1875 2    60   Output ~ 0
 TFT_HSD
 Text GLabel 2200 1975 2    60   Output ~ 0
 TFT_CLKIN
-Text GLabel 2200 2425 2    60   Output ~ 0
+Text GLabel 2200 2525 2    60   Output ~ 0
 TFT_VSD
 Text GLabel 2200 3200 2    60   Output ~ 0
 TFT_B7
@@ -702,7 +702,7 @@ Text GLabel 3825 1725 0    60   Input ~ 0
 TFT_DEN
 Text GLabel 3825 1825 0    60   Input ~ 0
 TFT_HSD
-Text GLabel 3825 1925 0    60   Input ~ 0
+Text GLabel 3825 2025 0    60   Input ~ 0
 TFT_CLKIN
 Text GLabel 3825 2225 0    60   Input ~ 0
 TFT_B7
@@ -759,7 +759,7 @@ Wire Wire Line
 Wire Wire Line
 	3825 1825 3900 1825
 Wire Wire Line
-	3825 1925 3900 1925
+	3825 2025 3900 2025
 Wire Wire Line
 	3825 2225 3900 2225
 Wire Wire Line
@@ -1034,14 +1034,21 @@ NoConn ~ 6025 1725
 NoConn ~ 6025 1625
 NoConn ~ 1700 1675
 NoConn ~ 2100 1675
-NoConn ~ 3900 2025
-NoConn ~ 3900 3350
 NoConn ~ 3900 3450
 NoConn ~ 3900 3550
-NoConn ~ 1700 2525
 NoConn ~ 1700 2625
 NoConn ~ 1700 2725
-NoConn ~ 2100 2525
 NoConn ~ 2100 2625
 NoConn ~ 2100 2725
+NoConn ~ 3900 1925
+Text GLabel 1575 2425 0    60   Input ~ 0
+LCD_STBYB
+Text GLabel 2200 2425 2    60   Output ~ 0
+TFT_STBYB
+Wire Wire Line
+	1575 2525 1700 2525
+Wire Wire Line
+	2100 2525 2200 2525
+Text GLabel 3900 3350 0    60   Input ~ 0
+TFT_STBYB
 $EndSCHEMATC
