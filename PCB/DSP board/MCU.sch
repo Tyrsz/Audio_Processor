@@ -801,10 +801,10 @@ Wire Wire Line
 Connection ~ 9200 3425
 Wire Wire Line
 	10100 3050 9300 3050
-Text GLabel 9975 2300 0    60   BiDi ~ 0
+Text GLabel 7325 5075 0    60   BiDi ~ 0
 BAT_POWER
 Wire Wire Line
-	9975 2300 10100 2300
+	7325 5075 7450 5075
 Text GLabel 9950 3200 0    60   Input ~ 0
 +3V3_MCU
 Wire Wire Line
@@ -956,10 +956,10 @@ NoConn ~ 5400 1275
 NoConn ~ 7400 1575
 NoConn ~ 7450 4475
 NoConn ~ 7450 4925
-NoConn ~ 7450 5075
 NoConn ~ 10100 1550
 NoConn ~ 10100 3350
 NoConn ~ 9950 5100
 NoConn ~ 10450 4800
 NoConn ~ 1300 3375
+NoConn ~ 10100 2300
 $EndSCHEMATC
