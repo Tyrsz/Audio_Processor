@@ -326,17 +326,6 @@ F 3 "" H 10025 4275 50  0001 C CNN
 $EndComp
 Text GLabel 9725 4375 0    60   Input ~ 0
 RED
-$Comp
-L +3V3 #PWR06
-U 1 1 5AB3F000
-P 9825 3875
-F 0 "#PWR06" H 9825 3725 50  0001 C CNN
-F 1 "+3V3" V 9775 4050 50  0000 C CNN
-F 2 "" H 9825 3875 50  0001 C CNN
-F 3 "" H 9825 3875 50  0001 C CNN
-	1    9825 3875
-	0    1    1    0   
-$EndComp
 Text GLabel 2400 4150 0    60   Output ~ 0
 HRTIM_FLT3
 Text Notes 8125 7650 0    60   ~ 0
@@ -573,4 +562,6 @@ Connection ~ 5550 4000
 Wire Wire Line
 	5625 3800 5550 3800
 Connection ~ 5550 3900
+Text GLabel 9825 3875 2    60   Input ~ 0
++3V3_MCU
 $EndSCHEMATC
