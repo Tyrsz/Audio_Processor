@@ -61,7 +61,7 @@ $EndDescr
 $Sheet
 S 875  875  1375 1375
 U 5AD71B4E
-F0 "Inputs" 60
-F1 "Inputs.sch" 60
+F0 "Input1" 60
+F1 "Input1.sch" 60
 $EndSheet
 $EndSCHEMATC

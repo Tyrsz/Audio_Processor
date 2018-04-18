@@ -1,4 +1,4 @@
-update=18/04/2018 12:15:22
+update=18/04/2018 12:54:54
 version=1
 last_client=kicad
 [pcbnew]
@@ -23,6 +23,8 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
+[general]
+version=1
 [eeschema]
 version=1
 LibDir=
@@ -59,5 +61,15 @@ LibName29=opto
 LibName30=atmel
 LibName31=contrib
 LibName32=valves
-[general]
-version=1
+LibName33=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/BOOST
+LibName34=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/BUCK
+LibName35=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/CODEC
+LibName36=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/CONNECTOR
+LibName37=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/EMI_GASKET
+LibName38=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/LDO
+LibName39=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/LED
+LibName40=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/POWER_SW
+LibName41=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/SDRAM
+LibName42=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/STM32
+LibName43=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/TVS_ARRAY
+LibName44=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/LOGIC
