@@ -1,0 +1,15 @@
+EESchema-LIBRARY Version 2.3
+#encoding utf-8
+#
+# PEL12D
+#
+DEF PEL12D S 0 40 Y Y 1 F N
+F0 "S" 0 500 60 H V C CNN
+F1 "PEL12D" 0 -500 60 H V C CNN
+F2 "" 0 0 60 H I C CNN
+F3 "" 0 0 60 H I C CNN
+DRAW
+ENDDRAW
+ENDDEF
+#
+#End Library
