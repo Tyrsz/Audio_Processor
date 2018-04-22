@@ -176,21 +176,21 @@ Text GLabel 4500 1450 2    60   Output ~ 0
 ESP_TX
 Text GLabel 4500 1550 2    60   Input ~ 0
 ESP_RX
-Text GLabel 4500 2050 2    60   Output ~ 0
+Text GLabel 3000 2250 0    60   Output ~ 0
 Phantom
-Text GLabel 4500 1950 2    60   Output ~ 0
+Text GLabel 3000 2050 0    60   Output ~ 0
 Phantom_2
-Text GLabel 4500 1850 2    60   Output ~ 0
+Text GLabel 3000 2150 0    60   Output ~ 0
 Phantom_1
 $Comp
 L Switch_SPST_4Pin S801
 U 1 1 5AE61B40
-P 1900 2125
-F 0 "S801" V 2125 2125 60  0000 C CNN
-F 1 "Switch_SPST_4Pin" V 1675 2125 60  0000 C CNN
-F 2 "Switch:FSM4JSMATR" H 1700 2225 60  0001 C CNN
-F 3 "" H 1700 2225 60  0001 C CNN
-	1    1900 2125
+P 1900 2525
+F 0 "S801" V 2125 2525 60  0000 C CNN
+F 1 "Switch_SPST_4Pin" V 1675 2525 60  0000 C CNN
+F 2 "Switch:FSM4JSMATR" H 1700 2625 60  0001 C CNN
+F 3 "" H 1700 2625 60  0001 C CNN
+	1    1900 2525
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -229,34 +229,34 @@ $EndComp
 $Comp
 L GND #PWR0136
 U 1 1 5AE61B5B
-P 2300 2425
-F 0 "#PWR0136" H 2300 2175 50  0001 C CNN
-F 1 "GND" H 2300 2275 50  0000 C CNN
-F 2 "" H 2300 2425 50  0001 C CNN
-F 3 "" H 2300 2425 50  0001 C CNN
-	1    2300 2425
+P 2300 2825
+F 0 "#PWR0136" H 2300 2575 50  0001 C CNN
+F 1 "GND" H 2300 2675 50  0000 C CNN
+F 2 "" H 2300 2825 50  0001 C CNN
+F 3 "" H 2300 2825 50  0001 C CNN
+	1    2300 2825
 	1    0    0    -1  
 $EndComp
 $Comp
 L R R802
 U 1 1 5AE61B61
-P 1400 1975
-F 0 "R802" V 1480 1975 50  0000 C CNN
-F 1 "12k" V 1400 1975 50  0000 C CNN
-F 2 "Resistors_SMD:R_0603" V 1330 1975 50  0001 C CNN
-F 3 "" H 1400 1975 50  0001 C CNN
-	1    1400 1975
-	0    1    1    0   
+P 1900 2125
+F 0 "R802" V 1980 2125 50  0000 C CNN
+F 1 "12k" V 1900 2125 50  0000 C CNN
+F 2 "Resistors_SMD:R_0603" V 1830 2125 50  0001 C CNN
+F 3 "" H 1900 2125 50  0001 C CNN
+	1    1900 2125
+	0    -1   -1   0   
 $EndComp
 $Comp
 L +3V3 #PWR0137
 U 1 1 5AE61B68
-P 1150 1975
-F 0 "#PWR0137" H 1150 1825 50  0001 C CNN
-F 1 "+3V3" V 1175 2175 50  0000 C CNN
-F 2 "" H 1150 1975 50  0001 C CNN
-F 3 "" H 1150 1975 50  0001 C CNN
-	1    1150 1975
+P 1650 2125
+F 0 "#PWR0137" H 1650 1975 50  0001 C CNN
+F 1 "+3V3" V 1675 2325 50  0000 C CNN
+F 2 "" H 1650 2125 50  0001 C CNN
+F 3 "" H 1650 2125 50  0001 C CNN
+	1    1650 2125
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -293,17 +293,6 @@ F 3 "" H 5300 2850 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Switch_SPST_4Pin S802
-U 1 1 5AE61B82
-P 6100 2600
-F 0 "S802" V 6325 2600 60  0000 C CNN
-F 1 "Switch_SPST_4Pin" V 5875 2625 60  0000 C CNN
-F 2 "Switch:FSM4JSMATR" H 5900 2700 60  0001 C CNN
-F 3 "" H 5900 2700 60  0001 C CNN
-	1    6100 2600
-	0    1    -1   0   
-$EndComp
-$Comp
 L GND #PWR0139
 U 1 1 5AE61B89
 P 5700 2900
@@ -336,15 +325,15 @@ F 3 "" H 6450 1950 50  0001 C CNN
 	1    6450 1950
 	-1   0    0    -1  
 $EndComp
-Text GLabel 3000 2050 0    60   Output ~ 0
+Text GLabel 4500 1650 2    60   Output ~ 0
 BLUE_1
-Text GLabel 3000 2150 0    60   Output ~ 0
+Text GLabel 4500 1850 2    60   Output ~ 0
 ORANGE_1
-Text GLabel 3000 2350 0    60   Output ~ 0
-ORANGE_2
-Text GLabel 3000 2250 0    60   Output ~ 0
-BLUE_2
 Text GLabel 3000 2650 0    60   Output ~ 0
+ORANGE_2
+Text GLabel 3000 2750 0    60   Output ~ 0
+BLUE_2
+Text GLabel 3000 2350 0    60   Output ~ 0
 ORANGE_3
 Text GLabel 3000 2450 0    60   Output ~ 0
 BLUE_3
@@ -401,23 +390,9 @@ Wire Wire Line
 Wire Wire Line
 	3075 2550 3100 2550
 Wire Wire Line
-	3000 2650 3100 2650
-Wire Wire Line
-	3000 2450 3100 2450
-Wire Wire Line
-	3000 2350 3100 2350
-Wire Wire Line
-	3000 2250 3100 2250
-Wire Wire Line
-	3000 2150 3100 2150
-Wire Wire Line
-	3000 2050 3100 2050
-Wire Wire Line
 	4400 1150 4500 1150
 Wire Wire Line
 	6450 2350 6450 2450
-Wire Wire Line
-	6450 2450 6350 2450
 Wire Wire Line
 	6450 1950 6450 2050
 Wire Wire Line
@@ -434,17 +409,15 @@ Wire Wire Line
 Wire Wire Line
 	4400 2450 5400 2450
 Wire Wire Line
-	1550 1975 1650 1975
+	1650 2125 1750 2125
 Wire Wire Line
-	1150 1975 1250 1975
+	2300 2675 2150 2675
 Wire Wire Line
-	2300 2275 2150 2275
+	2300 2825 2300 2675
 Wire Wire Line
-	2300 2425 2300 2275
+	2300 2375 2150 2375
 Wire Wire Line
-	2300 1975 2150 1975
-Wire Wire Line
-	2300 1350 2300 1975
+	2300 1350 2300 2375
 Wire Wire Line
 	2400 1350 2300 1350
 Wire Wire Line
@@ -454,12 +427,6 @@ Wire Wire Line
 	2800 1350 2800 1450
 Wire Wire Line
 	2700 1350 3100 1350
-Wire Wire Line
-	4400 2050 4500 2050
-Wire Wire Line
-	4400 1950 4500 1950
-Wire Wire Line
-	4400 1850 4500 1850
 Wire Wire Line
 	4400 1550 4500 1550
 Wire Wire Line
@@ -489,27 +456,6 @@ Wire Wire Line
 	6025 800  6050 800 
 Wire Wire Line
 	5950 900  6050 900 
-NoConn ~ 4400 2950
-NoConn ~ 4400 2850
-NoConn ~ 4400 2750
-NoConn ~ 4400 2650
-NoConn ~ 4400 2550
-NoConn ~ 4400 2350
-NoConn ~ 4400 2250
-NoConn ~ 4400 2150
-NoConn ~ 4400 1750
-NoConn ~ 4400 1650
-NoConn ~ 4400 1250
-NoConn ~ 4400 1350
-NoConn ~ 3100 1450
-NoConn ~ 3100 1550
-NoConn ~ 3100 1650
-NoConn ~ 3100 1750
-NoConn ~ 3100 1850
-NoConn ~ 3100 1950
-NoConn ~ 3100 2750
-NoConn ~ 3100 2850
-NoConn ~ 3100 2950
 Text GLabel 5950 1300 0    60   Input ~ 0
 ENCODER_1_SW
 Text GLabel 5950 1200 0    60   Input ~ 0
@@ -530,27 +476,21 @@ Wire Wire Line
 	4400 4450 4500 4450
 Wire Wire Line
 	4400 4550 4500 4550
-Text GLabel 4500 5050 2    60   Output ~ 0
-Phantom
-Text GLabel 4500 4950 2    60   Output ~ 0
-Phantom_2
-Text GLabel 4500 4850 2    60   Output ~ 0
-Phantom_1
-Wire Wire Line
-	4400 4850 4500 4850
-Wire Wire Line
-	4400 4950 4500 4950
-Wire Wire Line
-	4400 5050 4500 5050
-Text GLabel 3000 4950 0    60   Output ~ 0
-BLUE_1
-Text GLabel 3000 5050 0    60   Output ~ 0
-ORANGE_1
-Text GLabel 3000 5250 0    60   Output ~ 0
-ORANGE_2
 Text GLabel 3000 5150 0    60   Output ~ 0
-BLUE_2
+Phantom
+Text GLabel 3000 4950 0    60   Output ~ 0
+Phantom_2
+Text GLabel 3000 5050 0    60   Output ~ 0
+Phantom_1
+Text GLabel 4500 4650 2    60   Output ~ 0
+BLUE_1
+Text GLabel 4500 4850 2    60   Output ~ 0
+ORANGE_1
 Text GLabel 3000 5550 0    60   Output ~ 0
+ORANGE_2
+Text GLabel 3000 5650 0    60   Output ~ 0
+BLUE_2
+Text GLabel 3000 5250 0    60   Output ~ 0
 ORANGE_3
 Text GLabel 3000 5350 0    60   Output ~ 0
 BLUE_3
@@ -565,18 +505,6 @@ F 3 "" H 3075 5450 50  0001 C CNN
 	1    3075 5450
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	3000 5550 3100 5550
-Wire Wire Line
-	3000 5350 3100 5350
-Wire Wire Line
-	3000 5250 3100 5250
-Wire Wire Line
-	3000 5150 3100 5150
-Wire Wire Line
-	3000 5050 3100 5050
-Wire Wire Line
-	3000 4950 3100 4950
 Text Label 2325 1250 0    60   ~ 0
 +3V3_ESP
 Text Label 2600 4150 0    60   ~ 0
@@ -611,7 +539,7 @@ L GND #PWR0146
 U 1 1 5AE65985
 P 4425 4750
 F 0 "#PWR0146" H 4425 4500 50  0001 C CNN
-F 1 "GND" V 4450 4575 50  0000 C CNN
+F 1 "GND" V 4425 4575 50  0000 C CNN
 F 2 "" H 4425 4750 50  0001 C CNN
 F 3 "" H 4425 4750 50  0001 C CNN
 	1    4425 4750
@@ -634,31 +562,10 @@ F 3 "" H 3650 5400 60  0001 C CNN
 $EndComp
 Wire Wire Line
 	3075 5450 3100 5450
-NoConn ~ 3100 4350
-NoConn ~ 3100 4450
-NoConn ~ 3100 4550
-NoConn ~ 3100 4650
-NoConn ~ 3100 4750
-NoConn ~ 3100 4850
-NoConn ~ 3100 5650
-NoConn ~ 3100 5750
-NoConn ~ 3100 5850
-NoConn ~ 3100 5950
-NoConn ~ 4400 5950
-NoConn ~ 4400 5850
-NoConn ~ 4400 5750
-NoConn ~ 4400 5650
-NoConn ~ 4400 5550
-NoConn ~ 4400 5350
-NoConn ~ 4400 5250
-NoConn ~ 4400 5150
-NoConn ~ 4400 4350
-NoConn ~ 4400 4250
-NoConn ~ 4400 4650
 Text GLabel 2675 4250 0    60   BiDi ~ 0
 ESP_EN
 NoConn ~ 6350 2750
-NoConn ~ 1650 2275
+NoConn ~ 1650 2675
 $Comp
 L PWR_FLAG #FLG0147
 U 1 1 5AEA116E
@@ -670,4 +577,100 @@ F 3 "" H 2050 1150 50  0001 C CNN
 	1    2050 1150
 	1    0    0    -1  
 $EndComp
+Connection ~ 5775 2450
+$Comp
+L Switch_SPST_4Pin S802
+U 1 1 5AE61B82
+P 6100 2600
+F 0 "S802" V 6325 2600 60  0000 C CNN
+F 1 "Switch_SPST_4Pin" V 5875 2625 60  0000 C CNN
+F 2 "Switch:FSM4JSMATR" H 5900 2700 60  0001 C CNN
+F 3 "" H 5900 2700 60  0001 C CNN
+	1    6100 2600
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	2050 2125 2300 2125
+Connection ~ 2300 2125
+NoConn ~ 1650 2375
+Wire Wire Line
+	6450 2450 6350 2450
+Wire Wire Line
+	3000 2050 3100 2050
+Wire Wire Line
+	3000 2150 3100 2150
+Wire Wire Line
+	3000 2250 3100 2250
+Wire Wire Line
+	4400 1850 4500 1850
+Wire Wire Line
+	4400 1650 4500 1650
+Wire Wire Line
+	4400 4650 4500 4650
+Wire Wire Line
+	4400 4850 4500 4850
+Wire Wire Line
+	3000 4950 3100 4950
+Wire Wire Line
+	3000 5050 3100 5050
+Wire Wire Line
+	3000 5150 3100 5150
+Wire Wire Line
+	3000 5250 3100 5250
+Wire Wire Line
+	3000 5350 3100 5350
+Wire Wire Line
+	3000 5550 3100 5550
+Wire Wire Line
+	3000 5650 3100 5650
+NoConn ~ 3100 1450
+NoConn ~ 3100 1550
+NoConn ~ 3100 1650
+NoConn ~ 3100 1750
+NoConn ~ 3100 1850
+NoConn ~ 3100 1950
+Wire Wire Line
+	3000 2350 3100 2350
+Wire Wire Line
+	3000 2450 3100 2450
+Wire Wire Line
+	3000 2650 3100 2650
+Wire Wire Line
+	3000 2750 3100 2750
+NoConn ~ 4400 1250
+NoConn ~ 4400 1350
+NoConn ~ 4400 1750
+NoConn ~ 4400 1950
+NoConn ~ 4400 2050
+NoConn ~ 4400 2150
+NoConn ~ 4400 2250
+NoConn ~ 4400 2350
+NoConn ~ 4400 2550
+NoConn ~ 4400 2650
+NoConn ~ 4400 2750
+NoConn ~ 4400 2850
+NoConn ~ 4400 2950
+NoConn ~ 3100 2950
+NoConn ~ 3100 2850
+NoConn ~ 3100 4350
+NoConn ~ 3100 4450
+NoConn ~ 3100 4550
+NoConn ~ 3100 4650
+NoConn ~ 3100 4750
+NoConn ~ 3100 4850
+NoConn ~ 3100 5750
+NoConn ~ 3100 5850
+NoConn ~ 3100 5950
+NoConn ~ 4400 5950
+NoConn ~ 4400 5850
+NoConn ~ 4400 5750
+NoConn ~ 4400 5650
+NoConn ~ 4400 5550
+NoConn ~ 4400 5350
+NoConn ~ 4400 5250
+NoConn ~ 4400 5150
+NoConn ~ 4400 5050
+NoConn ~ 4400 4950
+NoConn ~ 4400 4250
+NoConn ~ 4400 4350
 $EndSCHEMATC
