@@ -114,13 +114,13 @@ F 3 "" H 1325 5575 60  0001 C CNN
 	2    2075 6075
 	1    0    0    -1  
 $EndComp
-Text GLabel 1325 5525 0    60   Output ~ 0
-Pad_1
-Text GLabel 2825 5525 2    60   Output ~ 0
-Impedance_1
-Text GLabel 2825 5425 2    60   Output ~ 0
-Impedance_2
 Text GLabel 1325 5425 0    60   Output ~ 0
+Pad_1
+Text GLabel 2825 5425 2    60   Output ~ 0
+Impedance_1
+Text GLabel 2825 5525 2    60   Output ~ 0
+Impedance_2
+Text GLabel 1325 5525 0    60   Output ~ 0
 Pad_2
 Text GLabel 1350 3700 0    60   Output ~ 0
 ESP_RX

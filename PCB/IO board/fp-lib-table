@@ -18,4 +18,5 @@
   (lib (name Inductor)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/Inductor.pretty")(options "")(descr ""))
   (lib (name Diode)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/Diode.pretty")(options "")(descr ""))
   (lib (name WIFI)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Footprints/WIFI.pretty")(options "")(descr ""))
+  (lib (name Graphics)(type KiCad)(uri "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Graphics.pretty")(options "")(descr ""))
 )

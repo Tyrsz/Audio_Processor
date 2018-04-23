@@ -458,9 +458,9 @@ Wire Wire Line
 	5950 900  6050 900 
 Text GLabel 5950 1300 0    60   Input ~ 0
 ENCODER_1_SW
-Text GLabel 5950 1200 0    60   Input ~ 0
-ENCODER_1_B
 Text GLabel 5950 1100 0    60   Input ~ 0
+ENCODER_1_B
+Text GLabel 5950 1200 0    60   Input ~ 0
 ENCODER_1_A
 Wire Wire Line
 	5950 1100 6050 1100
