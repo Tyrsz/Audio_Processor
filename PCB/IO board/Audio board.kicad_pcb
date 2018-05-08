@@ -101,7 +101,7 @@
       (mirror false)
       (drillshape 0)
       (scaleselection 1)
-      (outputdirectory Gerbers/RC1/))
+      (outputdirectory "D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/IO board/Gerbers/RC2/"))
   )
 
   (net 0 "")
