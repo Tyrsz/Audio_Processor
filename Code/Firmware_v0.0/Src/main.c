@@ -131,10 +131,10 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  /*DMA1->LIFCR = 0xffffffff;
+  DMA1->LIFCR = 0xffffffff;
   DMA1->HIFCR = 0xffffffff;
   DMA1_Stream0->CR &= 0xFFFFFFFE;
-  while (DMA1_Stream0->CR & 0x01 == 1);*/
+  while (DMA1_Stream0->CR & 0x01 == 1);
 
   /* USER CODE END SysInit */
 
@@ -167,14 +167,13 @@ int main(void)
 
   //SDRAM_init(hsdram1);
 
-  //CODEC_Init_OLM2_S(hspi5);
-  CODEC_Init_TDM(hspi5);
+  CODEC_Init_OLM2_S(hspi5);
 
   HAL_LPTIM_PWM_Start(&hlptim3, 0x03, 0x01);
   /*HAL_SAI_Receive_DMA(&hsai_BlockA2, SendSamples, 6);
   HAL_SAI_Transmit_DMA(&hsai_BlockB2, SendSamples, 6);*/
-  //HAL_SAI_Receive_DMA(&hsai_BlockA2, (uint8_t*)SendSamples, 6);
-  //SendSamples[24] = 0;
+  HAL_SAI_Receive_DMA(&hsai_BlockA2, (uint8_t*)SendSamples, 6);
+  SendSamples[24] = 0;
   //HAL_SAI_Transmit_IT(&hsai_BlockB2, SendSamples, 6);
 
   /* USER CODE END 2 */
@@ -183,14 +182,14 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  //G_H;
-	  //G_L;
-	  HAL_SAI_Receive(&hsai_BlockA2, SendSamples, 8, 0xff);
+	  G_H;
+	  G_L;
+	  //HAL_SAI_Receive(&hsai_BlockA2, SendSamples, 6, 0xff);
 
 	  //ReceiveSamples[4] = SendSamples[4];
 	  //ReceiveSamples[2] = SendSamples[2];
 
-	  HAL_SAI_Transmit(&hsai_BlockB2, SendSamples, 8, 0xff);
+	  //HAL_SAI_Transmit(&hsai_BlockB2, SendSamples, 6, 0xff);
 
 
   /* USER CODE END WHILE */
@@ -331,7 +330,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Instance = SAI2_Block_A;
   hsai_BlockA2.Init.Protocol = SAI_FREE_PROTOCOL;
   hsai_BlockA2.Init.AudioMode = SAI_MODEMASTER_RX;
-  hsai_BlockA2.Init.DataSize = SAI_DATASIZE_32;
+  hsai_BlockA2.Init.DataSize = SAI_DATASIZE_24;
   hsai_BlockA2.Init.FirstBit = SAI_FIRSTBIT_MSB;
   hsai_BlockA2.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
   hsai_BlockA2.Init.Synchro = SAI_ASYNCHRONOUS;
@@ -346,14 +345,14 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.PdmInit.MicPairsNbr = 0;
   hsai_BlockA2.Init.PdmInit.ClockEnable = SAI_PDM_CLOCK1_ENABLE;
   hsai_BlockA2.FrameInit.FrameLength = 256;
-  hsai_BlockA2.FrameInit.ActiveFrameLength = 1;
+  hsai_BlockA2.FrameInit.ActiveFrameLength = 128;
   hsai_BlockA2.FrameInit.FSDefinition = SAI_FS_STARTFRAME;
   hsai_BlockA2.FrameInit.FSPolarity = SAI_FS_ACTIVE_HIGH;
   hsai_BlockA2.FrameInit.FSOffset = SAI_FS_FIRSTBIT;
   hsai_BlockA2.SlotInit.FirstBitOffset = 0;
   hsai_BlockA2.SlotInit.SlotSize = SAI_SLOTSIZE_DATASIZE;
-  hsai_BlockA2.SlotInit.SlotNumber = 8;
-  hsai_BlockA2.SlotInit.SlotActive = 0x000000FF;
+  hsai_BlockA2.SlotInit.SlotNumber = 6;
+  hsai_BlockA2.SlotInit.SlotActive = 0x0000003F;
   if (HAL_SAI_Init(&hsai_BlockA2) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -362,7 +361,7 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Instance = SAI2_Block_B;
   hsai_BlockB2.Init.Protocol = SAI_FREE_PROTOCOL;
   hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_TX;
-  hsai_BlockB2.Init.DataSize = SAI_DATASIZE_32;
+  hsai_BlockB2.Init.DataSize = SAI_DATASIZE_24;
   hsai_BlockB2.Init.FirstBit = SAI_FIRSTBIT_MSB;
   hsai_BlockB2.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
   hsai_BlockB2.Init.Synchro = SAI_ASYNCHRONOUS;
@@ -378,14 +377,14 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.PdmInit.MicPairsNbr = 0;
   hsai_BlockB2.Init.PdmInit.ClockEnable = SAI_PDM_CLOCK1_ENABLE;
   hsai_BlockB2.FrameInit.FrameLength = 256;
-  hsai_BlockB2.FrameInit.ActiveFrameLength = 1;
+  hsai_BlockB2.FrameInit.ActiveFrameLength = 128;
   hsai_BlockB2.FrameInit.FSDefinition = SAI_FS_STARTFRAME;
   hsai_BlockB2.FrameInit.FSPolarity = SAI_FS_ACTIVE_HIGH;
   hsai_BlockB2.FrameInit.FSOffset = SAI_FS_FIRSTBIT;
   hsai_BlockB2.SlotInit.FirstBitOffset = 0;
   hsai_BlockB2.SlotInit.SlotSize = SAI_SLOTSIZE_DATASIZE;
-  hsai_BlockB2.SlotInit.SlotNumber = 8;
-  hsai_BlockB2.SlotInit.SlotActive = 0x000000FF;
+  hsai_BlockB2.SlotInit.SlotNumber = 6;
+  hsai_BlockB2.SlotInit.SlotActive = 0x0000003F;
   if (HAL_SAI_Init(&hsai_BlockB2) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);

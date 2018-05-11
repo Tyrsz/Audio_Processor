@@ -57,7 +57,7 @@ void CODEC_Init_TDM(SPI_HandleTypeDef hspi5)
 	Send[1] = 0x82; //MAP with Increment
 	Send[2] = 0x98; //Power Control
 
-	Send[3] = 0xF4; //Functional Mode
+	Send[3] = 0xF8; //Functional Mode
 	Send[4] = 0x36; //Interface Formats
 	Send[5] = 0x08; //ADC Control
 	Send[6] = 0x21;	//Transition Control
@@ -179,14 +179,14 @@ void CODEC_Init_OLM2_S(SPI_HandleTypeDef hspi5)
 	/*First block ready*/
 
 	/*Write first block*/
-	Nope1us;
+	/*Nope1us;
 	CS_L;
 	Nope250ns;
 	HAL_SPI_Transmit(&hspi5, Send, 8, 0xFF);
-	CS_H;
+	CS_H;*/
 	/*First block written*/
-	/*for (uint8_t x = 0; x < 6; x++)
-	CODEC_Write(hspi5, 0x02+x, Send[2+x]);*/
+	for (uint8_t x = 0; x < 6; x++)
+	CODEC_Write(hspi5, 0x02+x, Send[2+x]);
 
 
 
