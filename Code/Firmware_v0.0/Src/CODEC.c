@@ -57,7 +57,7 @@ void CODEC_Init_TDM(SPI_HandleTypeDef hspi5)
 	Send[1] = 0x82; //MAP with Increment
 	Send[2] = 0x98; //Power Control
 
-	Send[3] = 0xF8; //Functional Mode
+	Send[3] = 0xF4; //Functional Mode
 	Send[4] = 0x36; //Interface Formats
 	Send[5] = 0x08; //ADC Control
 	Send[6] = 0x21;	//Transition Control

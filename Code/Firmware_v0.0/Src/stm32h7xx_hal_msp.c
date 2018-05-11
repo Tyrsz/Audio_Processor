@@ -80,7 +80,6 @@ void HAL_MspInit(void)
 void HAL_LPTIM_MspInit(LPTIM_HandleTypeDef* hlptim)
 {
 
-  GPIO_InitTypeDef GPIO_InitStruct;
   if(hlptim->Instance==LPTIM3)
   {
   /* USER CODE BEGIN LPTIM3_MspInit 0 */
@@ -88,17 +87,6 @@ void HAL_LPTIM_MspInit(LPTIM_HandleTypeDef* hlptim)
   /* USER CODE END LPTIM3_MspInit 0 */
     /* Peripheral clock enable */
     __HAL_RCC_LPTIM3_CLK_ENABLE();
-  
-    /**LPTIM3 GPIO Configuration    
-    PA1     ------> LPTIM3_OUT 
-    */
-    GPIO_InitStruct.Pin = GPIO_PIN_1;
-    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-    GPIO_InitStruct.Alternate = GPIO_AF3_LPTIM3;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
   /* USER CODE BEGIN LPTIM3_MspInit 1 */
 
   /* USER CODE END LPTIM3_MspInit 1 */
@@ -130,12 +118,6 @@ void HAL_LPTIM_MspDeInit(LPTIM_HandleTypeDef* hlptim)
   /* USER CODE END LPTIM3_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_LPTIM3_CLK_DISABLE();
-  
-    /**LPTIM3 GPIO Configuration    
-    PA1     ------> LPTIM3_OUT 
-    */
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_1);
-
   /* USER CODE BEGIN LPTIM3_MspDeInit 1 */
 
   /* USER CODE END LPTIM3_MspDeInit 1 */
@@ -454,14 +436,14 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     hdma_sai2_a.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_sai2_a.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_sai2_a.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_sai2_a.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-    hdma_sai2_a.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_sai2_a.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_sai2_a.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
     hdma_sai2_a.Init.Mode = DMA_CIRCULAR;
     hdma_sai2_a.Init.Priority = DMA_PRIORITY_HIGH;
     hdma_sai2_a.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
     hdma_sai2_a.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
-    hdma_sai2_a.Init.MemBurst = DMA_MBURST_INC4;
-    hdma_sai2_a.Init.PeriphBurst = DMA_PBURST_INC4;
+    hdma_sai2_a.Init.MemBurst = DMA_MBURST_SINGLE;
+    hdma_sai2_a.Init.PeriphBurst = DMA_PBURST_SINGLE;
     if (HAL_DMA_Init(&hdma_sai2_a) != HAL_OK)
     {
       _Error_Handler(__FILE__, __LINE__);
@@ -488,10 +470,18 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     SAI2_client ++;
     
     /**SAI2_B_Block_B GPIO Configuration    
+    PA1     ------> SAI2_MCLK_B
     PE11     ------> SAI2_SD_B
     PE12     ------> SAI2_SCK_B
     PA12     ------> SAI2_FS_B 
     */
+    GPIO_InitStruct.Pin = GPIO_PIN_1;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF10_SAI2;
+    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
     GPIO_InitStruct.Pin = GPIO_PIN_11|GPIO_PIN_12;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -513,8 +503,8 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     hdma_sai2_b.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_sai2_b.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_sai2_b.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_sai2_b.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-    hdma_sai2_b.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    hdma_sai2_b.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+    hdma_sai2_b.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
     hdma_sai2_b.Init.Mode = DMA_CIRCULAR;
     hdma_sai2_b.Init.Priority = DMA_PRIORITY_HIGH;
     hdma_sai2_b.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
@@ -568,13 +558,14 @@ void HAL_SAI_MspDeInit(SAI_HandleTypeDef* hsai)
       }
     
     /**SAI2_B_Block_B GPIO Configuration    
+    PA1     ------> SAI2_MCLK_B
     PE11     ------> SAI2_SD_B
     PE12     ------> SAI2_SCK_B
     PA12     ------> SAI2_FS_B 
     */
-    HAL_GPIO_DeInit(GPIOE, GPIO_PIN_11|GPIO_PIN_12);
+    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_1|GPIO_PIN_12);
 
-    HAL_GPIO_DeInit(GPIOA, GPIO_PIN_12);
+    HAL_GPIO_DeInit(GPIOE, GPIO_PIN_11|GPIO_PIN_12);
 
     HAL_DMA_DeInit(hsai->hdmarx);
     HAL_DMA_DeInit(hsai->hdmatx);
