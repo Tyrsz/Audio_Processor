@@ -44,18 +44,30 @@
 #include "SDRAM.h"
 #include "CODEC.h"
 
+
 #define DEBUG
 
-#define Nope250ns for (uint8_t x = 0; x < 22; x++) asm("nop");
-#define Nope1us for (uint8_t x = 0; x < 98; x++) asm("nop");
+#ifdef DEBUG
+	#define R_H RED_GPIO_Port->BSRRH = RED_Pin;
+	#define R_L RED_GPIO_Port->BSRRL = RED_Pin;
+	#define G_H GREEN_GPIO_Port->BSRRH = GREEN_Pin;
+	#define G_L GREEN_GPIO_Port->BSRRL = GREEN_Pin;
+	#define B_H BLUE_GPIO_Port->BSRRH = BLUE_Pin;
+	#define B_L BLUE_GPIO_Port->BSRRL = BLUE_Pin;
+#endif
 
 
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 
+LPTIM_HandleTypeDef hlptim3;
+LPTIM_HandleTypeDef hlptim5;
+
 SAI_HandleTypeDef hsai_BlockA2;
 SAI_HandleTypeDef hsai_BlockB2;
+DMA_HandleTypeDef hdma_sai2_a;
+DMA_HandleTypeDef hdma_sai2_b;
 
 SPI_HandleTypeDef hspi5;
 
@@ -64,47 +76,32 @@ SDRAM_HandleTypeDef hsdram1;
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
 
+uint8_t SendSamples[32];
+uint8_t ReceiveSamples[32];
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_FMC_Init(void);
 static void MX_SAI2_Init(void);
 static void MX_SPI5_Init(void);
+static void MX_LPTIM5_Init(void);
+static void MX_LPTIM3_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
+
+void HAL_SAI_ConvCpltCallback(SAI_HandleTypeDef* hsai)
+{
+	B_H;
+}
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
-
-void SPI_Clockpulse(uint8_t PulseAmount)
-{
-	uint8_t x;
-	HAL_SPI_DeInit(&hspi5);
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = 0x80;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(GPIOF, &GPIO_InitStruct);
-	for (x = 0; x < PulseAmount; x++)
-	{
-		GPIOF->BSRRL = 0x80;
-		GPIOF->BSRRL = 0x80;
-		GPIOF->BSRRL = 0x80;
-		GPIOF->BSRRL = 0x80;
-		GPIOF->BSRRH = 0x80;
-		GPIOF->BSRRH = 0x80;
-		GPIOF->BSRRH = 0x80;
-		GPIOF->BSRRH = 0x80;
-	}
-
-	HAL_GPIO_DeInit(GPIOF, 7);
-	MX_SPI5_Init();
-}
-
 
 
 /* USER CODE END 0 */
@@ -134,14 +131,21 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  DMA1->LIFCR = 0xffffffff;
+  DMA1->HIFCR = 0xffffffff;
+  DMA1_Stream0->CR &= 0xFFFFFFFE;
+  while (DMA1_Stream0->CR & 0x01 == 1);
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_FMC_Init();
   MX_SAI2_Init();
   MX_SPI5_Init();
+  MX_LPTIM5_Init();
+  MX_LPTIM3_Init();
   /* USER CODE BEGIN 2 */
 #ifdef DEBUG
   GREEN_GPIO_Port->BSRRL = GREEN_Pin;
@@ -163,30 +167,14 @@ int main(void)
 
   //SDRAM_init(hsdram1);
 
+  CODEC_Init_OLM2_S(hspi5);
 
-  uint8_t SendSamples[32];
-  uint8_t ReceiveSamples[32] = {0x00, 0x00, 0x00, 0x00,
-							    0x00, 0x00, 0xff, 0x00,
-								0x00, 0xff, 0x00, 0x00,
-								0x00, 0xff, 0xff, 0x00,
-								0xff, 0x00, 0x00, 0x00,
-								0xff, 0x00, 0xff, 0x00,
-								0xff, 0xff, 0x00, 0x00,
-								0xff, 0xff, 0xff, 0x00};
-
-  uint8_t Send[3] = {0x9E, 0x02, 0xFF};
-  uint8_t Send2[3] = {0x9E, 0x02, 0x00};
-
-  uint8_t Receive[50];
-
-
-  ANA_EN_GPIO_Port->BSRRL = ANA_EN_Pin;
-  SPI5_NSS_GPIO_Port->BSRRL = SPI5_NSS_Pin;
-  CODEC_NRST_GPIO_Port->BSRRL = CODEC_NRST_Pin;
-  Nope1us;
-
-
-
+  HAL_LPTIM_PWM_Start(&hlptim3, 0x03, 0x01);
+  /*HAL_SAI_Receive_DMA(&hsai_BlockA2, SendSamples, 6);
+  HAL_SAI_Transmit_DMA(&hsai_BlockB2, SendSamples, 6);*/
+  HAL_SAI_Receive_DMA(&hsai_BlockA2, (uint8_t*)SendSamples, 6);
+  SendSamples[24] = 0;
+  //HAL_SAI_Transmit_IT(&hsai_BlockB2, SendSamples, 6);
 
   /* USER CODE END 2 */
 
@@ -194,42 +182,15 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  /*CODEC SPI TEST start*/
-	  SPI5_NSS_GPIO_Port->BSRRH = SPI5_NSS_Pin;
-	  Nope250ns;
-	  HAL_SPI_Transmit(&hspi5, Send, 3, 0xff);
-	  //RED_GPIO_Port->BSRRH = RED_Pin;
-	  SPI5_NSS_GPIO_Port->BSRRL = SPI5_NSS_Pin;
-	  HAL_Delay(500);
+	  G_H;
+	  G_L;
+	  //HAL_SAI_Receive(&hsai_BlockA2, SendSamples, 6, 0xff);
 
-	  SPI5_NSS_GPIO_Port->BSRRH = SPI5_NSS_Pin;
-	  Nope250ns;
-	  HAL_SPI_Transmit(&hspi5, Send, 3, 0xff);
-	  //RED_GPIO_Port->BSRRH = RED_Pin;
-	  SPI5_NSS_GPIO_Port->BSRRL = SPI5_NSS_Pin;
-	  HAL_Delay(500);
+	  //ReceiveSamples[4] = SendSamples[4];
+	  //ReceiveSamples[2] = SendSamples[2];
 
+	  //HAL_SAI_Transmit(&hsai_BlockB2, SendSamples, 6, 0xff);
 
-	  SPI5_NSS_GPIO_Port->BSRRH = SPI5_NSS_Pin;
-	  Nope250ns;
-	  HAL_SPI_Transmit(&hspi5, Send2, 3, 0xff);
-	  //RED_GPIO_Port->BSRRL = RED_Pin;
-	  SPI5_NSS_GPIO_Port->BSRRL = SPI5_NSS_Pin;
-	  HAL_Delay(500);
-
-	  SPI5_NSS_GPIO_Port->BSRRH = SPI5_NSS_Pin;
-	  Nope250ns;
-	  HAL_SPI_Transmit(&hspi5, Send, 3, 0xff);
-	  //RED_GPIO_Port->BSRRL = RED_Pin;
-	  SPI5_NSS_GPIO_Port->BSRRL = SPI5_NSS_Pin;
-	  HAL_Delay(500);
-	  /*CODEC SPI TEST end*/
-
-	  /* CODEC I2S TEST start*/
-	  //HAL_SAI_Transmit(&hsai_BlockB2, SendSamples, 32,0xff);
-	  //HAL_SAI_Receive(&hsai_BlockA2, ReceiveSamples, 32, 0xff);
-	  //HAL_SAI_Receive(&hsai_BlockA2, ReceiveSamples, 32, 0xfff);
-	  /* CODEC I2S TEST stop*/
 
   /* USER CODE END WHILE */
 
@@ -302,10 +263,12 @@ void SystemClock_Config(void)
   }
 
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SPI5|RCC_PERIPHCLK_SAI2
+                              |RCC_PERIPHCLK_LPTIM5|RCC_PERIPHCLK_LPTIM3
                               |RCC_PERIPHCLK_FMC;
   PeriphClkInitStruct.FmcClockSelection = RCC_FMCCLKSOURCE_D1HCLK;
   PeriphClkInitStruct.Sai23ClockSelection = RCC_SAI23CLKSOURCE_PLL;
   PeriphClkInitStruct.Spi45ClockSelection = RCC_SPI45CLKSOURCE_HSE;
+  PeriphClkInitStruct.Lptim345ClockSelection = RCC_LPTIM345CLKSOURCE_D3PCLK1;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -323,6 +286,43 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
+/* LPTIM3 init function */
+static void MX_LPTIM3_Init(void)
+{
+
+  hlptim3.Instance = LPTIM3;
+  hlptim3.Init.Clock.Source = LPTIM_CLOCKSOURCE_APBCLOCK_LPOSC;
+  hlptim3.Init.Clock.Prescaler = LPTIM_PRESCALER_DIV1;
+  hlptim3.Init.Trigger.Source = LPTIM_TRIGSOURCE_SOFTWARE;
+  hlptim3.Init.OutputPolarity = LPTIM_OUTPUTPOLARITY_HIGH;
+  hlptim3.Init.UpdateMode = LPTIM_UPDATE_IMMEDIATE;
+  hlptim3.Init.CounterSource = LPTIM_COUNTERSOURCE_INTERNAL;
+  hlptim3.Init.Input1Source = LPTIM_INPUT1SOURCE_GPIO;
+  if (HAL_LPTIM_Init(&hlptim3) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+}
+
+/* LPTIM5 init function */
+static void MX_LPTIM5_Init(void)
+{
+
+  hlptim5.Instance = LPTIM5;
+  hlptim5.Init.Clock.Source = LPTIM_CLOCKSOURCE_APBCLOCK_LPOSC;
+  hlptim5.Init.Clock.Prescaler = LPTIM_PRESCALER_DIV1;
+  hlptim5.Init.Trigger.Source = LPTIM_TRIGSOURCE_SOFTWARE;
+  hlptim5.Init.OutputPolarity = LPTIM_OUTPUTPOLARITY_HIGH;
+  hlptim5.Init.UpdateMode = LPTIM_UPDATE_IMMEDIATE;
+  hlptim5.Init.CounterSource = LPTIM_COUNTERSOURCE_INTERNAL;
+  if (HAL_LPTIM_Init(&hlptim5) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+}
+
 /* SAI2 init function */
 static void MX_SAI2_Init(void)
 {
@@ -330,14 +330,14 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Instance = SAI2_Block_A;
   hsai_BlockA2.Init.Protocol = SAI_FREE_PROTOCOL;
   hsai_BlockA2.Init.AudioMode = SAI_MODEMASTER_RX;
-  hsai_BlockA2.Init.DataSize = SAI_DATASIZE_32;
+  hsai_BlockA2.Init.DataSize = SAI_DATASIZE_24;
   hsai_BlockA2.Init.FirstBit = SAI_FIRSTBIT_MSB;
   hsai_BlockA2.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
   hsai_BlockA2.Init.Synchro = SAI_ASYNCHRONOUS;
-  hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
+  hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_192K;
+  hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_FULL;
+  hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
@@ -345,14 +345,14 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.PdmInit.MicPairsNbr = 0;
   hsai_BlockA2.Init.PdmInit.ClockEnable = SAI_PDM_CLOCK1_ENABLE;
   hsai_BlockA2.FrameInit.FrameLength = 256;
-  hsai_BlockA2.FrameInit.ActiveFrameLength = 1;
+  hsai_BlockA2.FrameInit.ActiveFrameLength = 128;
   hsai_BlockA2.FrameInit.FSDefinition = SAI_FS_STARTFRAME;
-  hsai_BlockA2.FrameInit.FSPolarity = SAI_FS_ACTIVE_LOW;
-  hsai_BlockA2.FrameInit.FSOffset = SAI_FS_BEFOREFIRSTBIT;
+  hsai_BlockA2.FrameInit.FSPolarity = SAI_FS_ACTIVE_HIGH;
+  hsai_BlockA2.FrameInit.FSOffset = SAI_FS_FIRSTBIT;
   hsai_BlockA2.SlotInit.FirstBitOffset = 0;
-  hsai_BlockA2.SlotInit.SlotSize = SAI_SLOTSIZE_32B;
-  hsai_BlockA2.SlotInit.SlotNumber = 1;
-  hsai_BlockA2.SlotInit.SlotActive = 0x00000000;
+  hsai_BlockA2.SlotInit.SlotSize = SAI_SLOTSIZE_DATASIZE;
+  hsai_BlockA2.SlotInit.SlotNumber = 6;
+  hsai_BlockA2.SlotInit.SlotActive = 0x0000003F;
   if (HAL_SAI_Init(&hsai_BlockA2) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -361,14 +361,14 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Instance = SAI2_Block_B;
   hsai_BlockB2.Init.Protocol = SAI_FREE_PROTOCOL;
   hsai_BlockB2.Init.AudioMode = SAI_MODEMASTER_TX;
-  hsai_BlockB2.Init.DataSize = SAI_DATASIZE_32;
+  hsai_BlockB2.Init.DataSize = SAI_DATASIZE_24;
   hsai_BlockB2.Init.FirstBit = SAI_FIRSTBIT_MSB;
   hsai_BlockB2.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
   hsai_BlockB2.Init.Synchro = SAI_ASYNCHRONOUS;
-  hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_DISABLE;
+  hsai_BlockB2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   hsai_BlockB2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
-  hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_192K;
+  hsai_BlockB2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_FULL;
+  hsai_BlockB2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
   hsai_BlockB2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockB2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockB2.Init.CompandingMode = SAI_NOCOMPANDING;
@@ -377,14 +377,14 @@ static void MX_SAI2_Init(void)
   hsai_BlockB2.Init.PdmInit.MicPairsNbr = 0;
   hsai_BlockB2.Init.PdmInit.ClockEnable = SAI_PDM_CLOCK1_ENABLE;
   hsai_BlockB2.FrameInit.FrameLength = 256;
-  hsai_BlockB2.FrameInit.ActiveFrameLength = 1;
+  hsai_BlockB2.FrameInit.ActiveFrameLength = 128;
   hsai_BlockB2.FrameInit.FSDefinition = SAI_FS_STARTFRAME;
-  hsai_BlockB2.FrameInit.FSPolarity = SAI_FS_ACTIVE_LOW;
+  hsai_BlockB2.FrameInit.FSPolarity = SAI_FS_ACTIVE_HIGH;
   hsai_BlockB2.FrameInit.FSOffset = SAI_FS_FIRSTBIT;
   hsai_BlockB2.SlotInit.FirstBitOffset = 0;
-  hsai_BlockB2.SlotInit.SlotSize = SAI_SLOTSIZE_32B;
-  hsai_BlockB2.SlotInit.SlotNumber = 1;
-  hsai_BlockB2.SlotInit.SlotActive = 0x00000000;
+  hsai_BlockB2.SlotInit.SlotSize = SAI_SLOTSIZE_DATASIZE;
+  hsai_BlockB2.SlotInit.SlotNumber = 6;
+  hsai_BlockB2.SlotInit.SlotActive = 0x0000003F;
   if (HAL_SAI_Init(&hsai_BlockB2) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -426,6 +426,23 @@ static void MX_SPI5_Init(void)
 
 }
 
+/** 
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void) 
+{
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Stream0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream0_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream0_IRQn);
+  /* DMA1_Stream1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Stream1_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Stream1_IRQn);
+
+}
 /* FMC initialization function */
 static void MX_FMC_Init(void)
 {

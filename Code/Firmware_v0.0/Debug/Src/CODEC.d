@@ -24,6 +24,7 @@ Src/CODEC.o: ../Src/CODEC.c \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h \
+ D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_lptim.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_sai.h \
@@ -83,6 +84,8 @@ D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_D
 D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h:
 
 D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h:
+
+D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_lptim.h:
 
 D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h:
 

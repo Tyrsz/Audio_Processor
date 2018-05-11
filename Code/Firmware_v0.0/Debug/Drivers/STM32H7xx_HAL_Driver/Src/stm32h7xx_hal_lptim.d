@@ -1,5 +1,5 @@
-Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sai_ex.o: \
- ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_sai_ex.c \
+Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_lptim.o: \
+ ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_lptim.c \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Inc/stm32h7xx_hal_conf.h \
  D:/Bureaublad/School/Fase\ 3/Bachelor/Code/Firmware_v0.0/Inc/main.h \
