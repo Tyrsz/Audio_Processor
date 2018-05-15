@@ -436,14 +436,11 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     hdma_sai2_a.Init.Direction = DMA_PERIPH_TO_MEMORY;
     hdma_sai2_a.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_sai2_a.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_sai2_a.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
-    hdma_sai2_a.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+    hdma_sai2_a.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_sai2_a.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_sai2_a.Init.Mode = DMA_CIRCULAR;
     hdma_sai2_a.Init.Priority = DMA_PRIORITY_HIGH;
-    hdma_sai2_a.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
-    hdma_sai2_a.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
-    hdma_sai2_a.Init.MemBurst = DMA_MBURST_SINGLE;
-    hdma_sai2_a.Init.PeriphBurst = DMA_PBURST_SINGLE;
+    hdma_sai2_a.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
     if (HAL_DMA_Init(&hdma_sai2_a) != HAL_OK)
     {
       _Error_Handler(__FILE__, __LINE__);
@@ -503,14 +500,11 @@ void HAL_SAI_MspInit(SAI_HandleTypeDef* hsai)
     hdma_sai2_b.Init.Direction = DMA_MEMORY_TO_PERIPH;
     hdma_sai2_b.Init.PeriphInc = DMA_PINC_DISABLE;
     hdma_sai2_b.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_sai2_b.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
-    hdma_sai2_b.Init.MemDataAlignment = DMA_MDATAALIGN_WORD;
+    hdma_sai2_b.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    hdma_sai2_b.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
     hdma_sai2_b.Init.Mode = DMA_CIRCULAR;
-    hdma_sai2_b.Init.Priority = DMA_PRIORITY_HIGH;
-    hdma_sai2_b.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
-    hdma_sai2_b.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
-    hdma_sai2_b.Init.MemBurst = DMA_MBURST_SINGLE;
-    hdma_sai2_b.Init.PeriphBurst = DMA_PBURST_SINGLE;
+    hdma_sai2_b.Init.Priority = DMA_PRIORITY_LOW;
+    hdma_sai2_b.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
     if (HAL_DMA_Init(&hdma_sai2_b) != HAL_OK)
     {
       _Error_Handler(__FILE__, __LINE__);

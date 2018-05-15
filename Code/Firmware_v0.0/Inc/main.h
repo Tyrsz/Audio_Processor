@@ -51,6 +51,8 @@
 
 #define SPI5_NSS_Pin GPIO_PIN_6
 #define SPI5_NSS_GPIO_Port GPIOF
+#define PAD2_Pin GPIO_PIN_0
+#define PAD2_GPIO_Port GPIOA
 #define CODEC_NRST_Pin GPIO_PIN_9
 #define CODEC_NRST_GPIO_Port GPIOD
 #define ANA_EN_Pin GPIO_PIN_10

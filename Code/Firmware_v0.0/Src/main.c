@@ -43,6 +43,7 @@
 /* USER CODE BEGIN Includes */
 #include "SDRAM.h"
 #include "CODEC.h"
+#include <stdlib.h>
 
 
 #define DEBUG
@@ -75,9 +76,27 @@ SDRAM_HandleTypeDef hsdram1;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
+//#define BlockSize 24
+uint8_t BlockSize = 24;
 
-uint8_t SendSamples[32];
-uint8_t ReceiveSamples[32];
+uint8_t** Block1;
+uint8_t** Block2;
+uint8_t** Block3;
+
+
+
+uint8_t** pIn;
+uint8_t** pEdit;
+uint8_t** pOut;
+
+uint8_t cntSample = 0;
+
+uint8_t EditSR = 0;
+#define newBlock 1
+#define editDone 2
+
+uint8_t OutSR = 0;
+#define firstTime 1
 
 
 /* USER CODE END PV */
@@ -95,10 +114,49 @@ static void MX_LPTIM3_Init(void);
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
 
-void HAL_SAI_ConvCpltCallback(SAI_HandleTypeDef* hsai)
+void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
 {
-	B_H;
+	if (cntSample >= BlockSize)
+	{
+		/*Counters and Status Registers*/
+		cntSample = 0;
+		EditSR |= newBlock;
+
+
+		/*Swap pointers around*/
+		uint8_t** pTemp = pIn;
+		pIn = pOut;
+		pOut = pEdit;
+		pEdit = pTemp;
+
+		/*First IT Transmit*/
+		if ((OutSR & firstTime) == 0)
+		{
+			HAL_SAI_Transmit_IT(&hsai_BlockB2, pOut[cntSample], 8);
+			OutSR |= firstTime;
+			EditSR |= editDone;
+		}
+
+		/*DSP didn't finish*/
+		if ((EditSR & editDone) == 0)
+		{
+
+			#ifdef DEBUG
+				R_H;
+			#endif
+		}
+	}
+	HAL_SAI_Receive_IT(&hsai_BlockA2, pIn[cntSample], 8);
+	EditSR &= 0xfd;		//Reset Finish Bit
+	cntSample++;
+
 }
+void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
+{
+	/*Keep The Train Going*/
+	HAL_SAI_Transmit_IT(&hsai_BlockB2, pOut[cntSample], 8);
+}
+
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -131,10 +189,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  DMA1->LIFCR = 0xffffffff;
-  DMA1->HIFCR = 0xffffffff;
-  DMA1_Stream0->CR &= 0xFFFFFFFE;
-  while (DMA1_Stream0->CR & 0x01 == 1);
+
 
   /* USER CODE END SysInit */
 
@@ -148,33 +203,68 @@ int main(void)
   MX_LPTIM3_Init();
   /* USER CODE BEGIN 2 */
 #ifdef DEBUG
-  GREEN_GPIO_Port->BSRRL = GREEN_Pin;
-  BLUE_GPIO_Port->BSRRL = BLUE_Pin;
+  G_L;
+  B_L;
   HAL_Delay(250);
 
-  RED_GPIO_Port->BSRRL = RED_Pin;
-  GREEN_GPIO_Port->BSRRH = GREEN_Pin;
+  R_L;
+  G_H;
   HAL_Delay(250);
 
-
-  GREEN_GPIO_Port->BSRRL = GREEN_Pin;
-  BLUE_GPIO_Port->BSRRH = BLUE_Pin;
+  G_L
+  B_H;
   HAL_Delay(250);
 
-  BLUE_GPIO_Port->BSRRL = BLUE_Pin;
+  B_L;
   HAL_Delay(250);
 #endif
 
+    /*Allocate Blocks*/
+	Block1 = (uint8_t**)calloc(BlockSize, sizeof(uint8_t*));
+	Block2 = (uint8_t**)calloc(BlockSize, sizeof(uint8_t*));
+	Block3 = (uint8_t**)calloc(BlockSize, sizeof(uint8_t*));
+
+	for (uint8_t cntCalloc = 0; cntCalloc < BlockSize; cntCalloc++)
+	{
+		Block1[cntCalloc] = (uint8_t*)calloc(32, sizeof(uint8_t));
+		Block2[cntCalloc] = (uint8_t*)calloc(32, sizeof(uint8_t));
+		Block3[cntCalloc] = (uint8_t*)calloc(32, sizeof(uint8_t));
+	}
+
+	/*Point to Blocks*/
+	pIn = Block1;
+	pEdit = Block2;
+	pOut = Block3;
+
+	/*Configure CODEC for TDM*/
+	CODEC_Init_TDM(hspi5);
+
+	/*Start Sampling Process*/
+	if (HAL_SAI_Transmit(&hsai_BlockB2, pOut[0], 8, 0xff) == HAL_OK)	//Dummy Transmit starts MCLK
+	{
+		if (HAL_SAI_Receive_IT(&hsai_BlockA2, pIn[0], 8) == HAL_OK)
+		{
+
+		}
+		else
+		{
+
+			#ifdef DEBUG
+				R_H;
+			#endif
+		}
+	}
+	else
+	{
+
+		#ifdef DEBUG
+			R_H;
+		#endif
+	}
+
+
   //SDRAM_init(hsdram1);
 
-  CODEC_Init_TDM(hspi5);
-
-  //HAL_LPTIM_PWM_Start(&hlptim3, 0x03, 0x01);
-  /*HAL_SAI_Receive_DMA(&hsai_BlockA2, SendSamples, 6);
-  HAL_SAI_Transmit_DMA(&hsai_BlockB2, SendSamples, 6);*/
-  //HAL_SAI_Receive_DMA(&hsai_BlockA2, (uint8_t*)SendSamples, 6);
-  //SendSamples[24] = 0;
-  //HAL_SAI_Transmit_IT(&hsai_BlockB2, SendSamples, 6);
 
   /* USER CODE END 2 */
 
@@ -182,15 +272,30 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  G_H;
-	  G_L;
-	  HAL_SAI_Receive(&hsai_BlockA2, SendSamples, 8, 0xff);
+	  /*New Block available for Editing*/
+	  if ((EditSR & newBlock) == 1)
+	  {
+		  EditSR &= 0xfe;		//Delete New Block Flag
 
-	  //ReceiveSamples[4] = SendSamples[4];
-	  //ReceiveSamples[2] = SendSamples[2];
+		  /* DSP CODE BEGIN */
 
-	  HAL_SAI_Transmit(&hsai_BlockB2, SendSamples, 8, 0xff);
 
+		  for (uint8_t x = 0; x < BlockSize; x++)
+		  {
+			  for (uint8_t y = 0; y < 32; x++)
+			  {
+				  pEdit[x][y] = 0;
+			  }
+			  /*pEdit[x][8] = pEdit[x][4];
+			  pEdit[x][9] = pEdit[x][5];
+			  pEdit[x][10] = pEdit[x][6];
+			  pEdit[x][11] = pEdit[x][7];*/
+		  }
+
+		  /* DSP CODEC END */
+
+		  EditSR |= editDone;
+	  }
 
   /* USER CODE END WHILE */
 
@@ -332,11 +437,11 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.AudioMode = SAI_MODEMASTER_RX;
   hsai_BlockA2.Init.DataSize = SAI_DATASIZE_32;
   hsai_BlockA2.Init.FirstBit = SAI_FIRSTBIT_MSB;
-  hsai_BlockA2.Init.ClockStrobing = SAI_CLOCKSTROBING_RISINGEDGE;
+  hsai_BlockA2.Init.ClockStrobing = SAI_CLOCKSTROBING_FALLINGEDGE;
   hsai_BlockA2.Init.Synchro = SAI_ASYNCHRONOUS;
   hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_FULL;
+  hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
   hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
   hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
@@ -503,10 +608,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(SPI5_NSS_GPIO_Port, SPI5_NSS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, CODEC_NRST_Pin|RED_Pin|GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, PAD2_Pin|ANA_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(ANA_EN_GPIO_Port, ANA_EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, CODEC_NRST_Pin|RED_Pin|GREEN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(BLUE_GPIO_Port, BLUE_Pin, GPIO_PIN_RESET);
@@ -521,19 +626,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(SPI5_NSS_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PAD2_Pin ANA_EN_Pin */
+  GPIO_InitStruct.Pin = PAD2_Pin|ANA_EN_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
   /*Configure GPIO pins : CODEC_NRST_Pin RED_Pin GREEN_Pin */
   GPIO_InitStruct.Pin = CODEC_NRST_Pin|RED_Pin|GREEN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : ANA_EN_Pin */
-  GPIO_InitStruct.Pin = ANA_EN_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(ANA_EN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : BLUE_Pin */
   GPIO_InitStruct.Pin = BLUE_Pin;

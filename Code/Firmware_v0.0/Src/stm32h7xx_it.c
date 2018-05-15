@@ -211,9 +211,7 @@ void SysTick_Handler(void)
 void DMA1_Stream0_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream0_IRQn 0 */
-	SendSamples[24]++;
-	HAL_SAI_Transmit(&hsai_BlockB2, SendSamples, 6, 0xff);
-	//HAL_SAI_Receive_DMA(&hsai_BlockA2, SendSamples, 6);
+
   /* USER CODE END DMA1_Stream0_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_sai2_a);
   /* USER CODE BEGIN DMA1_Stream0_IRQn 1 */
@@ -227,7 +225,6 @@ void DMA1_Stream0_IRQHandler(void)
 void DMA1_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream1_IRQn 0 */
-	HAL_SAI_DMAResume(&hsai_BlockB2);
 
   /* USER CODE END DMA1_Stream1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_sai2_b);
@@ -274,7 +271,6 @@ void SPI5_IRQHandler(void)
 void SAI2_IRQHandler(void)
 {
   /* USER CODE BEGIN SAI2_IRQn 0 */
-
   /* USER CODE END SAI2_IRQn 0 */
   HAL_SAI_IRQHandler(&hsai_BlockA2);
   HAL_SAI_IRQHandler(&hsai_BlockB2);
