@@ -57,6 +57,13 @@
 	#define B_L BLUE_GPIO_Port->BSRRL = BLUE_Pin;
 #endif
 
+#define DTCRAM 0x20000000 	//128k
+#define RAM_D1 0x24000000	//512k
+#define RAM_D2 0x30000000	//288k
+#define RAM_D3 0x38000000	//64k
+#define ITCMRAM 0x00000000	//64k
+
+
 
 /* USER CODE END Includes */
 
@@ -72,22 +79,24 @@ DMA_HandleTypeDef hdma_sai2_b;
 
 SPI_HandleTypeDef hspi5;
 
+DMA_HandleTypeDef hdma_memtomem_bdma_channel0;
+DMA_HandleTypeDef hdma_memtomem_dma1_stream2;
 SDRAM_HandleTypeDef hsdram1;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
-//#define BlockSize 24
-uint8_t BlockSize = 24;
+uint32_t BlockSize = 24;	//Maximum 3072
+uint32_t MemSize;
+uint32_t GetSize;
 
-uint8_t** Block1;
-uint8_t** Block2;
-uint8_t** Block3;
+uint8_t * Block1;
+uint8_t * Block2;
+uint8_t * Block3;
 
-
-
-uint8_t** pIn;
-uint8_t** pEdit;
-uint8_t** pOut;
+uint8_t * pIn;
+uint8_t * pEdit;
+uint8_t * pOut;
+uint8_t * pSwitch;
 
 uint8_t cntSample = 0;
 
@@ -95,15 +104,12 @@ uint8_t EditSR = 0;
 #define newBlock 1
 #define editDone 2
 
-uint8_t OutSR = 0;
-#define firstTime 1
-
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_BDMA_Init(void);
 static void MX_DMA_Init(void);
 static void MX_FMC_Init(void);
 static void MX_SAI2_Init(void);
@@ -116,45 +122,13 @@ static void MX_LPTIM3_Init(void);
 
 void HAL_SAI_RxCpltCallback(SAI_HandleTypeDef *hsai)
 {
-	if (cntSample >= BlockSize)
-	{
-		/*Counters and Status Registers*/
-		cntSample = 0;
-		EditSR |= newBlock;
-
-
-		/*Swap pointers around*/
-		uint8_t** pTemp = pIn;
-		pIn = pOut;
-		pOut = pEdit;
-		pEdit = pTemp;
-
-		/*First IT Transmit*/
-		if ((OutSR & firstTime) == 0)
-		{
-			HAL_SAI_Transmit_IT(&hsai_BlockB2, pOut[cntSample], 8);
-			OutSR |= firstTime;
-			EditSR |= editDone;
-		}
-
-		/*DSP didn't finish*/
-		if ((EditSR & editDone) == 0)
-		{
-
-			#ifdef DEBUG
-				R_H;
-			#endif
-		}
-	}
-	HAL_SAI_Receive_IT(&hsai_BlockA2, pIn[cntSample], 8);
-	EditSR &= 0xfd;		//Reset Finish Bit
-	cntSample++;
-
+	/*HAL_DMA_Start(&hdma_memtomem_dma2_stream0, (uint32_t)Block2, (uint32_t)Block3, MemSize);*/
+	//HAL_DMA_Start_IT(&hdma_memtomem_dma1_stream2, (uint32_t)Block1, (uint32_t)Block3, MemSize);
+	EditSR = 0;
 }
 void HAL_SAI_TxCpltCallback(SAI_HandleTypeDef *hsai)
 {
-	/*Keep The Train Going*/
-	HAL_SAI_Transmit_IT(&hsai_BlockB2, pOut[cntSample], 8);
+
 }
 
 /* USER CODE END PFP */
@@ -195,6 +169,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_BDMA_Init();
   MX_DMA_Init();
   MX_FMC_Init();
   MX_SAI2_Init();
@@ -219,40 +194,22 @@ int main(void)
   HAL_Delay(250);
 #endif
 
+    MemSize = 32 * BlockSize;
+    GetSize = 8 * BlockSize;
+
     /*Allocate Blocks*/
-	Block1 = (uint8_t**)calloc(BlockSize, sizeof(uint8_t*));
-	Block2 = (uint8_t**)calloc(BlockSize, sizeof(uint8_t*));
-	Block3 = (uint8_t**)calloc(BlockSize, sizeof(uint8_t*));
-
-	for (uint8_t cntCalloc = 0; cntCalloc < BlockSize; cntCalloc++)
-	{
-		Block1[cntCalloc] = (uint8_t*)calloc(32, sizeof(uint8_t));
-		Block2[cntCalloc] = (uint8_t*)calloc(32, sizeof(uint8_t));
-		Block3[cntCalloc] = (uint8_t*)calloc(32, sizeof(uint8_t));
-	}
-
-	/*Point to Blocks*/
-	pIn = Block1;
-	pEdit = Block2;
-	pOut = Block3;
+    Block1 = (uint8_t *) RAM_D2;
+    Block2 = (uint8_t *) RAM_D2 + MemSize;
+    Block3 = (uint8_t *) RAM_D2 + MemSize + MemSize;
 
 	/*Configure CODEC for TDM*/
 	CODEC_Init_TDM(hspi5);
 
 	/*Start Sampling Process*/
-	if (HAL_SAI_Transmit(&hsai_BlockB2, pOut[0], 8, 0xff) == HAL_OK)	//Dummy Transmit starts MCLK
+	SAI2_Block_B->CR1 |= 0x1000;
+	if (HAL_SAI_Receive_DMA(&hsai_BlockA2, Block1, GetSize) == HAL_OK)
 	{
-		if (HAL_SAI_Receive_IT(&hsai_BlockA2, pIn[0], 8) == HAL_OK)
-		{
-
-		}
-		else
-		{
-
-			#ifdef DEBUG
-				R_H;
-			#endif
-		}
+		HAL_SAI_Transmit_DMA(&hsai_BlockB2, Block3, GetSize);
 	}
 	else
 	{
@@ -261,6 +218,7 @@ int main(void)
 			R_H;
 		#endif
 	}
+
 
 
   //SDRAM_init(hsdram1);
@@ -272,30 +230,57 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  G_H;
 	  /*New Block available for Editing*/
-	  if ((EditSR & newBlock) == 1)
-	  {
-		  EditSR &= 0xfe;		//Delete New Block Flag
+
 
 		  /* DSP CODE BEGIN */
 
-
-		  for (uint8_t x = 0; x < BlockSize; x++)
+		  /*for (uint8_t x = 0; x < BlockSize; x++)
 		  {
-			  for (uint8_t y = 0; y < 32; x++)
-			  {
-				  pEdit[x][y] = 0;
-			  }
-			  /*pEdit[x][8] = pEdit[x][4];
-			  pEdit[x][9] = pEdit[x][5];
-			  pEdit[x][10] = pEdit[x][6];
-			  pEdit[x][11] = pEdit[x][7];*/
-		  }
+			  Block3[4+x*32] = Block1[4+x*32];
+			  Block3[5+x*32] = Block1[5+x*32];
+			  Block3[6+x*32] = Block1[6+x*32];
+			  Block3[7+x*32] = Block1[7+x*32];
 
-		  /* DSP CODEC END */
+			  Block3[8+x*32] = Block1[4+x*32];
+			  Block3[9+x*32] = Block1[5+x*32];
+			  Block3[10+x*32] = Block1[6+x*32];
+			  Block3[11+x*32] = Block1[7+x*32];
+		  }*/
+	  if (EditSR == 0)
+	  {
+		  B_H;
 
-		  EditSR |= editDone;
+			/*for (uint16_t x = 0; x < MemSize; x++)
+			{
+				Block3[x] = Block2[x];
+
+				Block2[x] = Block1[x];
+			}*/
+		  /*for (uint8_t x = 0; x < BlockSize; x++)
+		  {
+			  Block3[4+x*32] = Block1[8+x*32];
+			  Block3[5+x*32] = Block1[9+x*32];
+			  Block3[6+x*32] = Block1[10+x*32];
+			  Block3[7+x*32] = Block1[11+x*32];
+
+			  Block3[8+x*32] = Block1[12+x*32];
+			  Block3[9+x*32] = Block1[13+x*32];
+			  Block3[10+x*32] = Block1[14+x*32];
+			  Block3[11+x*32] = Block1[15+x*32];
+		  }*/
+			  HAL_DMA_Start(&hdma_memtomem_dma1_stream2, (uint32_t)Block1, (uint32_t)Block3, MemSize);
+
+		  EditSR = 1;
 	  }
+	  B_L;
+		  /* DSP CODE END */
+
+
+	  G_L;
+
+
 
   /* USER CODE END WHILE */
 
@@ -441,9 +426,9 @@ static void MX_SAI2_Init(void)
   hsai_BlockA2.Init.Synchro = SAI_ASYNCHRONOUS;
   hsai_BlockA2.Init.OutputDrive = SAI_OUTPUTDRIVE_ENABLE;
   hsai_BlockA2.Init.NoDivider = SAI_MASTERDIVIDER_ENABLE;
-  hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_EMPTY;
+  hsai_BlockA2.Init.FIFOThreshold = SAI_FIFOTHRESHOLD_FULL;
   hsai_BlockA2.Init.AudioFrequency = SAI_AUDIO_FREQUENCY_96K;
-  hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_DISABLE;
+  hsai_BlockA2.Init.SynchroExt = SAI_SYNCEXT_OUTBLOCKB_ENABLE;
   hsai_BlockA2.Init.MonoStereoMode = SAI_STEREOMODE;
   hsai_BlockA2.Init.CompandingMode = SAI_NOCOMPANDING;
   hsai_BlockA2.Init.PdmInit.Activation = DISABLE;
@@ -533,11 +518,59 @@ static void MX_SPI5_Init(void)
 
 /** 
   * Enable DMA controller clock
+  * Configure DMA for memory to memory transfers
+  *   hdma_memtomem_bdma_channel0
+  */
+static void MX_BDMA_Init(void) 
+{
+  /* DMA controller clock enable */
+  __HAL_RCC_BDMA_CLK_ENABLE();
+
+  /* Configure DMA request hdma_memtomem_bdma_channel0 on BDMA_Channel0 */
+  hdma_memtomem_bdma_channel0.Instance = BDMA_Channel0;
+  hdma_memtomem_bdma_channel0.Init.Request = BDMA_REQUEST_MEM2MEM;
+  hdma_memtomem_bdma_channel0.Init.Direction = DMA_MEMORY_TO_MEMORY;
+  hdma_memtomem_bdma_channel0.Init.PeriphInc = DMA_PINC_ENABLE;
+  hdma_memtomem_bdma_channel0.Init.MemInc = DMA_MINC_ENABLE;
+  hdma_memtomem_bdma_channel0.Init.PeriphDataAlignment = DMA_PDATAALIGN_WORD;
+  hdma_memtomem_bdma_channel0.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+  hdma_memtomem_bdma_channel0.Init.Mode = DMA_NORMAL;
+  hdma_memtomem_bdma_channel0.Init.Priority = DMA_PRIORITY_LOW;
+  if (HAL_DMA_Init(&hdma_memtomem_bdma_channel0) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
+
+}
+
+/** 
+  * Enable DMA controller clock
+  * Configure DMA for memory to memory transfers
+  *   hdma_memtomem_dma1_stream2
   */
 static void MX_DMA_Init(void) 
 {
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* Configure DMA request hdma_memtomem_dma1_stream2 on DMA1_Stream2 */
+  hdma_memtomem_dma1_stream2.Instance = DMA1_Stream2;
+  hdma_memtomem_dma1_stream2.Init.Request = DMA_REQUEST_MEM2MEM;
+  hdma_memtomem_dma1_stream2.Init.Direction = DMA_MEMORY_TO_MEMORY;
+  hdma_memtomem_dma1_stream2.Init.PeriphInc = DMA_PINC_DISABLE;
+  hdma_memtomem_dma1_stream2.Init.MemInc = DMA_MINC_DISABLE;
+  hdma_memtomem_dma1_stream2.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+  hdma_memtomem_dma1_stream2.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+  hdma_memtomem_dma1_stream2.Init.Mode = DMA_NORMAL;
+  hdma_memtomem_dma1_stream2.Init.Priority = DMA_PRIORITY_VERY_HIGH;
+  hdma_memtomem_dma1_stream2.Init.FIFOMode = DMA_FIFOMODE_ENABLE;
+  hdma_memtomem_dma1_stream2.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_FULL;
+  hdma_memtomem_dma1_stream2.Init.MemBurst = DMA_MBURST_SINGLE;
+  hdma_memtomem_dma1_stream2.Init.PeriphBurst = DMA_PBURST_SINGLE;
+  if (HAL_DMA_Init(&hdma_memtomem_dma1_stream2) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
+  }
 
   /* DMA interrupt init */
   /* DMA1_Stream0_IRQn interrupt configuration */

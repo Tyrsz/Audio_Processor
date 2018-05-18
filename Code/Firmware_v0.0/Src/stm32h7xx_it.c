@@ -37,9 +37,15 @@
 
 /* USER CODE BEGIN 0 */
 #define DEBUG
-#include "CODEC.h"
 
-uint8_t SendSamples[32];
+#ifdef DEBUG
+	#define R_H RED_GPIO_Port->BSRRH = RED_Pin;
+	#define R_L RED_GPIO_Port->BSRRL = RED_Pin;
+	#define G_H GREEN_GPIO_Port->BSRRH = GREEN_Pin;
+	#define G_L GREEN_GPIO_Port->BSRRL = GREEN_Pin;
+	#define B_H BLUE_GPIO_Port->BSRRH = BLUE_Pin;
+	#define B_L BLUE_GPIO_Port->BSRRL = BLUE_Pin;
+#endif
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -75,7 +81,7 @@ void HardFault_Handler(void)
 {
   /* USER CODE BEGIN HardFault_IRQn 0 */
 	#ifdef DEBUG
-	RED_GPIO_Port->BSRRH = RED_Pin;
+	R_H;
 	#endif
 
 
@@ -211,10 +217,11 @@ void SysTick_Handler(void)
 void DMA1_Stream0_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream0_IRQn 0 */
-
+  B_H;
   /* USER CODE END DMA1_Stream0_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_sai2_a);
   /* USER CODE BEGIN DMA1_Stream0_IRQn 1 */
+  B_L;
 
   /* USER CODE END DMA1_Stream0_IRQn 1 */
 }
@@ -225,11 +232,12 @@ void DMA1_Stream0_IRQHandler(void)
 void DMA1_Stream1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Stream1_IRQn 0 */
+  B_H;
 
   /* USER CODE END DMA1_Stream1_IRQn 0 */
   HAL_DMA_IRQHandler(&hdma_sai2_b);
   /* USER CODE BEGIN DMA1_Stream1_IRQn 1 */
-
+  B_L;
   /* USER CODE END DMA1_Stream1_IRQn 1 */
 }
 
@@ -253,10 +261,6 @@ void FMC_IRQHandler(void)
 void SPI5_IRQHandler(void)
 {
   /* USER CODE BEGIN SPI5_IRQn 0 */
-	SPI5_NSS_GPIO_Port->BSRRL = SPI5_NSS_Pin;
-	//go &= 0xfe;
-	//lptim5_state = 1;
-	//HAL_LPTIM_Counter_Start_IT(&hlptim5, 100);
 
   /* USER CODE END SPI5_IRQn 0 */
   HAL_SPI_IRQHandler(&hspi5);
@@ -271,6 +275,7 @@ void SPI5_IRQHandler(void)
 void SAI2_IRQHandler(void)
 {
   /* USER CODE BEGIN SAI2_IRQn 0 */
+
   /* USER CODE END SAI2_IRQn 0 */
   HAL_SAI_IRQHandler(&hsai_BlockA2);
   HAL_SAI_IRQHandler(&hsai_BlockB2);
@@ -285,7 +290,6 @@ void SAI2_IRQHandler(void)
 void LPTIM5_IRQHandler(void)
 {
   /* USER CODE BEGIN LPTIM5_IRQn 0 */
-
 
   /* USER CODE END LPTIM5_IRQn 0 */
   HAL_LPTIM_IRQHandler(&hlptim5);

@@ -13,7 +13,6 @@
 #endif /* CODEC_C_ */
 #include "stm32h7xx_hal.h"
 
-//extern uint8_t SendSamples[32];
 
 void CODEC_Init_TDM(SPI_HandleTypeDef);
 void CODEC_Deinit(SPI_HandleTypeDef);

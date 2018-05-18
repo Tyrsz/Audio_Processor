@@ -20,9 +20,6 @@
 #define ANA_EN ANA_EN_GPIO_Port->BSRRL = ANA_EN_Pin;
 #define ANA_DIS ANA_EN_GPIO_Port->BSRRH = ANA_EN_Pin;
 
-
-uint8_t SendSamples[32];
-
 void CODEC_Write(SPI_HandleTypeDef hspi5, uint8_t Adress, uint8_t Data)
 {
 	uint8_t Send[3];
