@@ -1,0 +1,9 @@
+
+FMC @ 200MHz
+array size: 65316
+Write time: 1.506kHz --> 0.66ms
+
+FMC @ 400MHz
+array size: 32768
+Write time: 3kHz --> 0.33ms
+

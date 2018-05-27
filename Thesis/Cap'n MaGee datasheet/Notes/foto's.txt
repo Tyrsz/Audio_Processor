@@ -1,0 +1,14 @@
+1: Buck
+2: Input voltage
+3: Voltage selector output
+4: MCU regulator
+5: MCU voltage
+6: Analog output
+7: Buck startup
+8: Analog startup
+9: button down
+10: button up
+11: boost shutdown
+12: boost startup
+13: SDRAM CS
+14: SDRAM CLK

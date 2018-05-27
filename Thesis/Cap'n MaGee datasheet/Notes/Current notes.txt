@@ -1,0 +1,10 @@
+HSE - No Peripherals
+3kHz idle: 60mA
+1MHz idle: 60mA
+32MHz idle: 70mA
+100MHz idle: 80mA
+200MHz idle: 90mA
+400MHz idle: 110mA
+
+HSE - SDRAM
+400MHz read & write: 130mA

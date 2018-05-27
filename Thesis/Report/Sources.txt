@@ -1,0 +1,21 @@
+STM32H7: http://www.st.com/content/ccc/resource/technical/document/datasheet/group3/23/be/db/eb/29/39/4b/eb/DM00387108/files/DM00387108.pdf/jcr:content/translations/en.DM00387108.pdf
+RAM:
+CODEC: http://www.mouser.com/ds/2/76/CS42448_F4-275685.pdf
+
+TPS2113A: 
+MIC23050: 
+ADP150: 
+TPS61170: http://www.ti.com/lit/ds/symlink/tps61170.pdf
+Scherm: https://www.mouser.de/datasheet/2/291/NHD-5.0-800480TF-ATXL-CTP-248135.pdf
+uitleg Phy: https://en.wikipedia.org/wiki/PHY_(chip)
+
+Capacitor articles:
+linearity: http://diyaudioprojects.com/mirror/members.aol.com/sbench102/caps.html
+Capacitor sound: https://linearaudio.nl/sites/linearaudio.net/files/Bateman%20EW%2001%202003%20mar2003%2010%20to%20100uF%20caps%20and%20100%20Hz%20measurements_0.pdf
+
+resistors: https://www.eetimes.com/document.asp?doc_id=1278251
+resistors 2: https://dcc.ligo.org/public/0002/T0900200/001/current_noise.pdf
+
+SOFTWARE
+SDRAM initiliasation steps: https://github.com/cnoviello/stm32-discof7/blob/master/stm32-discof7-lcddim/system/src/BSP/stm32746g_discovery_sdram.c
+FFT complexity: https://ccrma.stanford.edu/~jos/ReviewFourier/FFT_Convolution_vs_Direct.html
