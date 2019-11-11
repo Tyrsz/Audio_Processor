@@ -22,7 +22,7 @@
 #define SDRAM_MODEREG_WRITEBURST_MODE_BURST 	((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE    ((uint16_t)0x0200)
 
-#define SDRAM_BANK1_BASE ((uint32_t)0xC0000000)
+#define SDRAM_BANK1_ADDR ((uint32_t)0xC0000000)
 
 
 /*-----------------------------------------------*/

@@ -1,4 +1,4 @@
-update=19/04/2018 16:12:25
+update=11/11/2019 11:21:29
 version=1
 last_client=kicad
 [pcbnew]
@@ -25,16 +25,6 @@ version=1
 NetIExt=net
 [general]
 version=1
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60
 [eeschema]
 version=1
 LibDir=
@@ -87,3 +77,13 @@ LibName45=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol
 LibName46=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/DISCRETE
 LibName47=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/ELECTROMECH
 LibName48=D:/Bureaublad/School/Fase 3/Bachelor/Audio_Processor/PCB/Ki-Lib/Symbol/WIFI
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=./
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1

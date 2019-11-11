@@ -9,7 +9,7 @@
 
 
 
-volatile uint32_t * SDRAM_BASE =  (volatile uint32_t *)SDRAM_BANK1_ADDR;
+static volatile uint32_t * SDRAM_BASE =  (volatile uint32_t *)SDRAM_BANK1_ADDR;
 HAL_StatusTypeDef SDRAM_state;
 
 uint8_t SDRAM_init(SDRAM_HandleTypeDef * hsdram)
