@@ -1,10 +1,32 @@
+/*-----INCLUDES-----*/
 #include <stdint.h>
 #include "stm32h7xx_hal.h"
+/*-----SYSTEM DEFINES-----*/
+#define SDRAM_BANK1_ADDR ((uint32_t)0xC0000000)
 
-#ifndef __AS4C32M8SA_7TCN
+#define SDRAM_OK		0
+#define SDRAM_CLK_ERR 	-1
+#define SDRAM_PALL_ERR 	-2
+#define SDRAM_ARFR_ERR 	-4
+#define SDRAM_LOAD_ERR 	-8
+#define SDRAM_PRR_ERR 	-16
+
 #define __AS4C32M8SA_7TCN
 
-#define SDRAM_TIMEOUT     ((uint32_t)0xFFFF)
+/*-----FUNCTION PROTOTYPES---*/
+int SDRAM_Init(SDRAM_HandleTypeDef * hsdram);
+
+
+
+
+
+
+
+/*-----RAM DEFINES-----*/
+#ifdef __AS4C32M8SA_7TCN
+
+
+#define SDRAM_TIMEOUT     						((uint32_t)0xFFFF)
 
 #define SDRAM_MODEREG_BURST_LENGTH_1            ((uint16_t)0x0000)
 #define SDRAM_MODEREG_BURST_LENGTH_2            ((uint16_t)0x0001)
@@ -22,15 +44,6 @@
 #define SDRAM_MODEREG_WRITEBURST_MODE_BURST 	((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE    ((uint16_t)0x0200)
 
-#define SDRAM_BANK1_ADDR ((uint32_t)0xC0000000)
-
-
-/*-----------------------------------------------*/
-uint8_t SDRAM_init(SDRAM_HandleTypeDef * hsdram);
-/*-----------------------------------------------*/
-
-
 #endif
 
-
-
+/*__________________________________________________________________*/

@@ -122,7 +122,8 @@ int main(void)
   MX_LPTIM5_Init();
   MX_LPTIM3_Init();
   /* USER CODE BEGIN 2 */
-  SDRAM_init(&hsdram1);
+  SDRAM_Init(&hsdram1);
+  SDRAM_Clear();
 
   /* USER CODE END 2 */
 

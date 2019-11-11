@@ -1,1 +1,2 @@
-SDRAM.c:15:9:SDRAM_init	40	static
+SDRAM.c:17:5:SDRAM_Init	32	static
+SDRAM.c:53:5:SDRAM_Clear	4	static
