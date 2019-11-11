@@ -1,0 +1,9 @@
+stm32h7xx_hal_msp.c:49:6:HAL_MspInit	16	static
+stm32h7xx_hal_msp.c:80:6:HAL_LPTIM_MspInit	16	static
+stm32h7xx_hal_msp.c:111:6:HAL_LPTIM_MspDeInit	0	static
+stm32h7xx_hal_msp.c:142:6:HAL_SPI_MspInit	48	static
+stm32h7xx_hal_msp.c:176:6:HAL_SPI_MspDeInit	8	static
+stm32h7xx_hal_msp.c:308:6:HAL_SDRAM_MspInit	48	static
+stm32h7xx_hal_msp.c:386:6:HAL_SDRAM_MspDeInit	8	static
+stm32h7xx_hal_msp.c:402:6:HAL_SAI_MspInit	64	static
+stm32h7xx_hal_msp.c:526:6:HAL_SAI_MspDeInit	8	static
