@@ -176,8 +176,25 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(4);
   } >DTCMRAM
-
   
+  
+ .D1_data 0x24000000 :
+  {
+    KEEP(*(.section_D1_RAM))
+  } > RAM_D1
+  
+ .D2_data 0x30000000 :
+  {
+    KEEP(*(.section_D2_RAM))
+  } > RAM_D2
+
+ .D3_data 0x38000000 :
+  {
+    KEEP(*(.section_D3_RAM))
+  } > RAM_D3
+
+
+
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

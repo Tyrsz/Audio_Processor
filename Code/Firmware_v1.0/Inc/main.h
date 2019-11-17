@@ -58,6 +58,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define SPI5_NSS_Pin GPIO_PIN_6
+#define SPI5_NSS_GPIO_Port GPIOF
+#define CODEC_NRST_Pin GPIO_PIN_9
+#define CODEC_NRST_GPIO_Port GPIOD
+#define ANA_EN_Pin GPIO_PIN_10
+#define ANA_EN_GPIO_Port GPIOA
+#define RED_Pin GPIO_PIN_6
+#define RED_GPIO_Port GPIOD
+#define GREEN_Pin GPIO_PIN_7
+#define GREEN_GPIO_Port GPIOD
+#define BLUE_Pin GPIO_PIN_9
+#define BLUE_GPIO_Port GPIOG
 #define FMC_NBL0_user_Pin GPIO_PIN_0
 #define FMC_NBL0_user_GPIO_Port GPIOE
 /* USER CODE BEGIN Private defines */

@@ -1,0 +1,6 @@
+CODEC.c:23:6:CODEC_Write	16	static
+CODEC.c:42:6:CODEC_Init_TDM	24	static
+CODEC.c:99:6:CODEC_Init_OLM2_M	152	static
+CODEC.c:157:6:CODEC_Init_OLM2_S	152	static
+CODEC.c:216:6:CODEC_Deinit	24	static
+CODEC.c:237:6:CODEC_Init	24	static
